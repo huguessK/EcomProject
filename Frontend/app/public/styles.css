@@ -1,0 +1,34 @@
+body{
+    background-color: white !important;
+}
+
+.header-banner{
+    background-color: green;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.navigation-bar{
+    height: 65px;
+    background-color: grey;
+}
+
+.container-fluid span, .container-fluid a{
+    color: white;
+}
+
+.icons a{
+    margin-left: 10px;
+}
+
+.dropdown-menu{
+    background-color: grey; 
+}
+
+ul.no-bullets {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
