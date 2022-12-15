@@ -4,22 +4,25 @@ import App from './components/App';
 //import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/home";
-import Contact from "./pages/contact";
-import FashionMen from "./pages/fashion-men";
-import FashionWomen from "./pages/fashion-women";
-import Login from "./pages/login";
-import Cart from "./pages/cart";
-import Question from "./pages/question";
-import SkinCare from "./pages/skin-care";
-import About from "./pages/about";
+import Home from "./pages/home/home.js";
+import Contact from "./pages/contact/contact.js";
+import FashionMen from "./pages/fashion-men/fashion-men.js";
+import FashionWomen from "./pages/fashion-women/fashion-women.js";
+import Login from "./pages/login/login.js";
+import Cart from "./pages/cart/cart.js";
+import Question from "./pages/question/question.js";
+import SkinCare from "./pages/skin-care/skin-care.js";
+import About from "./pages/about/about.js";
 
 export default function Ap() {
+  
   return (
+    
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="contact" element={<Contact />} />
+        <Route path="/" >
+          <Route index element={<Home />} />
+          <Route path="contact" element={<Contact/>} />
           <Route path="fashion-men" element={<FashionMen />} />
           <Route path="fashion-women" element={<FashionWomen />} />
           <Route path="login" element={<Login />} />
@@ -42,11 +45,12 @@ export default function Ap() {
 
 
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <React.StrictMode>
-    <Ap />
+   
+    <Ap />  
   </React.StrictMode>
 );
 
