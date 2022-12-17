@@ -1,11 +1,12 @@
 
 const Banner=[
 
+    
     {
         id:1,
         time: 500,
-        name: "Health",
-        img: "Images/Banner/HealthThanksPexels.jpg"
+        name: "Fashion-men",
+        img: "Images/Banner/FashionMenThanksPexels.jpg"
     },
 
     {
@@ -17,9 +18,9 @@ const Banner=[
 
     {
         id:3,
-        time: 0,
-        name: "Fashion-men",
-        img: "Images/Banner/FashionMenThanksPexels.jpg"
+        time: 1500,
+        name: "SkinCare",
+        img: "Images/Banner/SkinThanksPexels.jpg"
     }
 ]
 

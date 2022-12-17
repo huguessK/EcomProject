@@ -10,6 +10,7 @@ const https= require("https");
 //creation of new espress object
 const app= express();
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.json());
 
 
 app.get("/api/home",(req,res)=>{
@@ -17,6 +18,15 @@ app.get("/api/home",(req,res)=>{
 })
 
 
+
+
+app.post("/login-data", function (req, res) {
+  console.log(req.body)
+});
+
+app.post("/create-account-data", function (req, res) {
+  console.log(req.body)
+});
 
 
 

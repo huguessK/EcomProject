@@ -9,6 +9,7 @@ import Contact from "./pages/contact/contact.js";
 import FashionMen from "./pages/fashion-men/fashion-men.js";
 import FashionWomen from "./pages/fashion-women/fashion-women.js";
 import Login from "./pages/login/login.js";
+import CreateAccounte from "./pages/login/account.js";
 import Cart from "./pages/cart/cart.js";
 import Question from "./pages/question/question.js";
 import SkinCare from "./pages/skin-care/skin-care.js";
@@ -26,6 +27,7 @@ export default function Ap() {
           <Route path="fashion-men" element={<FashionMen />} />
           <Route path="fashion-women" element={<FashionWomen />} />
           <Route path="login" element={<Login />} />
+          <Route path="create-account" element={<CreateAccounte />} />
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />
           <Route path="question" element={<Question />} />
