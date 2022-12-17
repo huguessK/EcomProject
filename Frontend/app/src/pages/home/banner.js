@@ -7,9 +7,9 @@ const Banner=[
         time: 500,
         name: "Fashion-men",
         img: "Images/Banner/FashionMenThanksPexels.jpg"
-    },
+    }
 
-    {
+    /*,{
         id:2,
         time: 1000,
         name: "Fashion-women",
@@ -21,7 +21,7 @@ const Banner=[
         time: 1500,
         name: "SkinCare",
         img: "Images/Banner/SkinThanksPexels.jpg"
-    }
+    }*/
 ]
 
 

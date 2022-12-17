@@ -7,3 +7,23 @@
 /*.carousel-item > img{
     
 }*/
+
+.bestseller{
+    padding-top: 10px;
+    height: 500px; 
+    
+}
+
+.bestseller h1{
+    text-align: center;
+}
+
+
+/*.row > div{
+    margin-right: 5px;
+}*/
+
+.ProductComponentV1 img{
+    width: 80%;
+    border-radius: 5px;
+}

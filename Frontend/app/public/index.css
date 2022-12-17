@@ -3,11 +3,12 @@ body{
 }
 
 .header-banner{
-    background-color: green;
+    background-color: #C291A4;
     height: 30px;
     padding: 0;
     margin: 0;
     text-align: center;
+    font-size: 13px;
 }
 
 .navigation-bar{
@@ -32,3 +33,15 @@ ul.no-bullets {
     margin: 0;
     padding: 0;
   }
+
+/*cart */
+.bi-cart{
+    position: relative;
+}
+.cart-item{
+    font-size: 8px;
+    position: absolute;
+    left: 9px;
+    bottom: 9px;
+    color: red;
+}
