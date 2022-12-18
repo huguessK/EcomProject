@@ -33,7 +33,7 @@ app.post("/create-account-data", function (req, res) {
 
 let itemQuantity=0;
 
-app.post("/cart-item-quantity", function (req, res) {
+app.post("/api/cart-item-quantity", function (req, res) {
   itemQuantity+=req.body.item;
   if(itemQuantity<0){
     itemQuantity=0;

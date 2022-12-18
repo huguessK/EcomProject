@@ -34,7 +34,7 @@ import "./home.css";
   function sendItemQuantity(quantity)
   {  
         
-    fetch("/cart-item-quantity", {
+    fetch("/api/cart-item-quantity", {
             method: "POST",
             headers :{
               'Content-Type':'application/json',
