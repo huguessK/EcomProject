@@ -1,16 +1,62 @@
-import React,{ useState }   from 'react';
+import React,{ useState, useEffect }   from 'react';
 import { Outlet} from "react-router-dom";
-import Banner from './banner.js';
+import Banner,{SecondBanner} from './banner.js';
+import Header from '../../components/header.jsx';
+import Footer from '../../components/footer.jsx';
 import {BestSellingFashion,BestSellingSkinCare} from './bestselling.js';
 import "./home.css";
+//import { cartItem } from '../cart/cart.js';
 
 
 
  function ProductComponentV1(props){
+
+
+  const [itemadded, setItemadded] = useState(0);
+  //const [str, setStr] = useState(itemadded.toString(10));//base 10
+
+  function IncremItemadded(){
+      //setStr(itemadded.toString(10)+"+");
+    setItemadded(1) ;
+    sendItemQuantity(1);
+  }
+
+  
+  function DecremItemadded(){
+
+      //setStr(itemadded.toString(10));
+      setItemadded(-1);
+      //setStr(itemadded.toString(10));
+    
+    sendItemQuantity(-1);
+  }
+
+  function sendItemQuantity(quantity)
+  {  
+        
+    fetch("/cart-item-quantity", {
+            method: "POST",
+            headers :{
+              'Content-Type':'application/json',
+            },
+            body: JSON.stringify({
+              item: quantity
+            })}).then(function(response) {
+              
+              return response.json();
+
+          });
+          setItemadded(0);
+          //event.preventDefault();
+  }
+
+
+
     return (
       <div className="ProductComponentV1">
         <img src={props.img} alt={props.name}></img>
         <p>{props.description}</p>
+        <button className="button button-add-home" onClick={IncremItemadded}>Add to cart</button>
       </div>
     )
   }
@@ -116,15 +162,33 @@ const BestSeller=()=>{
 
 
 
-
-
-
-
-
 const Home = () => {
+
+  //get the number of items added
+  const [backendData, setBackendData]=useState({"item":0});
+
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+      
+      fetch("/api/cart-item-quantity").then(
+        response=> response.json()
+        ).then(
+        data => {
+          setBackendData(data)
+          }
+        )
+
+    }, 500);
+
+
+  return () => clearInterval(interval);//fetch number of items added to cart each 0.5s
+  }, []);
+  
+
   return (
     <>
-    
+    {Header(backendData["item"])}
     <div id="carouselExampleInterval" className="carousel slide home-slide" data-bs-ride="carousel">
     <div className="carousel-inner">
      {Banner.map(createBanner)}
@@ -139,6 +203,13 @@ const Home = () => {
   </button>*/}
 </div>
 <BestSeller />
+
+<div className="carousel-inner">
+     {SecondBanner.map(createBanner)}
+     </div>
+
+<Footer />
+
       <Outlet />
     </>
   )

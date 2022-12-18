@@ -14,9 +14,11 @@ import Cart from "./pages/cart/cart.js";
 import Question from "./pages/question/question.js";
 import SkinCare from "./pages/skin-care/skin-care.js";
 import About from "./pages/about/about.js";
+//import { cartItem } from './pages/cart/cart.js';//count number of items in cart
 
 export default function Ap() {
-  
+ 
+
   return (
     
     <BrowserRouter>
@@ -29,7 +31,7 @@ export default function Ap() {
           <Route path="login" element={<Login />} />
           <Route path="create-account" element={<CreateAccounte />} />
           <Route path="about" element={<About />} />
-          <Route path="cart" element={<Cart />} />
+          <Route path="cart" element={<Cart/>} />
           <Route path="question" element={<Question />} />
           <Route path="skin-care" element={<SkinCare />} />
         </Route>

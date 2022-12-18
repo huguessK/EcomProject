@@ -1,0 +1,58 @@
+
+.header-banner{
+    background-color: #C291A4;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 13px;
+}
+
+.navigation-bar{
+    height: 65px;
+    background-color: grey;
+}
+
+.container-fluid span, .container-fluid a{
+    color: white;
+}
+
+.icons a{
+    margin-left: 10px;
+}
+
+.dropdown-menu{
+    background-color: grey; 
+}
+
+ul.no-bullets {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+/*cart */
+.bi-cart{
+    position: relative;
+}
+.cart-item{
+    font-size: 8px;
+    position: absolute;
+    left: 9px;
+    bottom: 9px;
+    color: red;
+}
+
+footer{
+    background-color: #C291A4;
+    padding-top: 10px;
+
+}
+
+.row h6{
+font-size: 11px;
+}
+
+.row h6>a{
+    color: white;
+}

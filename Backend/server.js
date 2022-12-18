@@ -7,16 +7,18 @@ const mongoose = require("mongoose");
 //const request = require ("request");//not used in the end
 const https= require("https");
 
+
 //creation of new espress object
 const app= express();
+//for post request
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
+
 
 
 app.get("/api/home",(req,res)=>{
     res.json({"home":["home1","home2","home3"]});
 })
-
 
 
 
@@ -29,7 +31,20 @@ app.post("/create-account-data", function (req, res) {
 });
 
 
+let itemQuantity=0;
 
+app.post("/cart-item-quantity", function (req, res) {
+  itemQuantity+=req.body.item;
+  if(itemQuantity<0){
+    itemQuantity=0;
+  }
+  
+  console.log(req.body);
+});
+
+app.get("/api/cart-item-quantity",(req,res)=>{
+  res.json({"item":itemQuantity});
+})
 
 
 
@@ -38,7 +53,7 @@ app.post("/create-account-data", function (req, res) {
 
 var port = process.env.PORT;
 if(port==null || port==""){
-  port=5000;
+  port=3000;
 }
 
 app.listen(port, ()=> {
