@@ -38,12 +38,12 @@ app.post("/api/cart-item-quantity", function (req, res) {
   if(itemQuantity<0){
     itemQuantity=0;
   }
-  
-  console.log(req.body);
+  res.end();
 });
 
 app.get("/api/cart-item-quantity",(req,res)=>{
   res.json({"item":itemQuantity});
+  
 })
 
 

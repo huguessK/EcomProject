@@ -64,8 +64,49 @@
     color: white;
   }
 
-
+.button-shop-men, .button-shop-women, .button-skin-care{
+    position: relative;
+    width: 15%;
+    background-color:  #C291A4;;
+}
   
+.button-shop-men{
+    bottom: 250px;
+    left: 400px;;
+}
+
+.button-shop-women{
+    bottom: 250px;
+    left: 450px;;
+}
+
+
+.carousel-item{
+    position: relative;
+}
+
+.Fashion-text{
+    position: absolute;
+    color: white;
+    bottom: 60%;
+    right: 28%;
+
+}
+
+.SkinCare-text{
+    position: absolute;
+    color: white;
+    bottom: 60%;
+    right: 50%;
+}
+
+.button-skin-care{
+    background-color: #055ada;
+    color: white;
+    bottom: 250px;
+    left: 300px;
+}
+
 /*NewsLetter component style*/
 
 .newsletter-subscribe {

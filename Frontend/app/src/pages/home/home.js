@@ -114,19 +114,54 @@ return(
 
 
 
-function Carousel(props){
+function CarouselFashion(props){
+
+ //to redirect to another page on button click button-shop-men/women
+ function redirectMen(){
+  window.location.href="/fashion-men";
+}
+
+function redirectWomen(){
+  window.location.href="/fashion-women";
+}
+  
   return(
     <div className="carousel-item active" data-bs-interval={props.time}>
+    
       <img  src={props.img} className="d-block w-100 carousel-img" alt={props.name} />
+      <h3 className="Fashion-text">Vivamus pellentesque dui nec luctus semper</h3>
+      <button className="button button-add-home button-shop-men" onClick={redirectMen}>Shop Men</button>
+      <button className="button button-add-home button-shop-women" onClick={redirectWomen}>Shop Women</button>
+         
     </div>
   )
 }
 
 
-function createBanner(Banner){
+function CarouselSkinCare(props){
+
+  //to redirect to another page on button click button-shop-skin-care
+ 
+ 
+ function redirectSkinCare(){
+   window.location.href="/skin-care";
+ }
+   
+   return(
+     <div className="carousel-item active" data-bs-interval={props.time}>
+       <img  src={props.img} className="d-block w-100 carousel-img" alt={props.name} />
+       <h3 className="SkinCare-text">Vivamus pellentesque dui nec luctus semper</h3>
+        <button className="button button-add-home button-skin-care" onClick={redirectSkinCare}>Shop</button>
+     </div>
+   )
+ }
+
+
+
+function createBannerFashion(Banner){
   return(
 
-    <Carousel key={Banner.id}
+    <CarouselFashion key={Banner.id}
     time={Banner.time}
     img={Banner.img}
     name={Banner.name}
@@ -134,6 +169,16 @@ function createBanner(Banner){
   )
 }
 
+function createBannerSkinCare(Banner){
+  return(
+
+    <CarouselSkinCare key={Banner.id}
+    time={Banner.time}
+    img={Banner.img}
+    name={Banner.name}
+     />
+  )
+}
 
 
 
@@ -145,15 +190,15 @@ const BestSeller=()=>{
   <div className="bestseller">
   <h1>Our Best-Sellers</h1>
   <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-fashion-tab" data-bs-toggle="tab" data-bs-target="#nav-fashion" type="button" role="tab" aria-controls="nav-fashion" aria-selected="true">Fashion</button>
-      <button class="nav-link" id="nav-skincare-tab" data-bs-toggle="tab" data-bs-target="#nav-skincare" type="button" role="tab" aria-controls="nav-skincare" aria-selected="false">Skin care</button>
+    <div className="nav nav-tabs" id="nav-tab" role="tablist">
+      <button className="nav-link active" id="nav-fashion-tab" data-bs-toggle="tab" data-bs-target="#nav-fashion" type="button" role="tab" aria-controls="nav-fashion" aria-selected="true">Fashion</button>
+      <button className="nav-link" id="nav-skincare-tab" data-bs-toggle="tab" data-bs-target="#nav-skincare" type="button" role="tab" aria-controls="nav-skincare" aria-selected="false">Skin care</button>
     </div>
   </nav>
 
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-fashion" role="tabpanel" aria-labelledby="nav-fashion-tab" tabindex="0"><FashionBestSelling/></div>
-      <div class="tab-pane fade" id="nav-skincare" role="tabpanel" aria-labelledby="nav-skincare-tab" tabindex="0"><SkinCareBestSelling/></div>
+    <div className="tab-content" id="nav-tabContent">
+      <div className="tab-pane fade show active" id="nav-fashion" role="tabpanel" aria-labelledby="nav-fashion-tab" tabindex="0"><FashionBestSelling/></div>
+      <div className="tab-pane fade" id="nav-skincare" role="tabpanel" aria-labelledby="nav-skincare-tab" tabindex="0"><SkinCareBestSelling/></div>
     </div>
   </div>
      
@@ -165,6 +210,7 @@ const BestSeller=()=>{
 
 const Home = () => {
 
+ 
   //get the number of items added
   const [backendData, setBackendData]=useState({"item":0});
 
@@ -192,7 +238,8 @@ const Home = () => {
     {Header(backendData["item"])}
     <div id="carouselExampleInterval" className="carousel slide home-slide" data-bs-ride="carousel">
     <div className="carousel-inner">
-     {Banner.map(createBanner)}
+         
+    {Banner.map(createBannerFashion)}
      </div>
      {/*<button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -206,7 +253,7 @@ const Home = () => {
 <BestSeller />
 
 <div className="carousel-inner">
-     {SecondBanner.map(createBanner)}
+     {SecondBanner.map(createBannerSkinCare)}
      </div>
 <NewsLetter/>
 <Footer />
