@@ -1,6 +1,7 @@
 import React,{ useState, useEffect }   from 'react';
 import { Outlet} from "react-router-dom";
 import Banner,{SecondBanner} from './banner.js';
+import NewsLetter from './newsletter.js';
 import Header from '../../components/header.jsx';
 import Footer from '../../components/footer.jsx';
 import {BestSellingFashion,BestSellingSkinCare} from './bestselling.js';
@@ -207,7 +208,7 @@ const Home = () => {
 <div className="carousel-inner">
      {SecondBanner.map(createBanner)}
      </div>
-
+<NewsLetter/>
 <Footer />
 
       <Outlet />

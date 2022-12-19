@@ -47,6 +47,10 @@ app.get("/api/cart-item-quantity",(req,res)=>{
 })
 
 
+app.get("/api/newsletter",(req,res)=>{
+  res.json({"newsletterMail":req.body.newsletter});
+})
+
 
 
 
