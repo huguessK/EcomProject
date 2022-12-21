@@ -1,8 +1,10 @@
-import React,{ useState }   from 'react';
+import React,{ useState, useEffect }   from 'react';
+import Header from '../../components/header.jsx';
+import Footer from '../../components/footer.jsx';
 import './login.css'
 
 
-const CreateAccounte = () => {
+const CreateForm = () => {
 
   const [email, setEmail] = useState("");
   const [psw, setPsw] = useState("");
@@ -90,6 +92,43 @@ const CreateAccounte = () => {
       </div>
 
 );}
+
+
+const CreateAccounte = () => {
+    const [backendData, setBackendData]=useState({});
+
+    useEffect(() => {
+  
+      const interval = setInterval(() => {
+        
+        fetch("/api/cart-item-quantity").then(
+          response=> response.json()
+          ).then(
+          data => {
+            setBackendData(data)
+            }
+          )
+  
+      }, 500);
+  
+  
+    return () => clearInterval(interval);//fetch number of items added to cart each 0.5s
+    }, []);
+    
+    
+      return (
+        <>
+        {Header(backendData["item"])}
+        <CreateForm/>
+        <Footer/>
+        </>
+        
+      )
+
+}
+
+
+
 
 
 export default CreateAccounte;
