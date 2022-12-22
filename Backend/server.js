@@ -23,32 +23,130 @@ app.get("/api/home",(req,res)=>{
 
 
 app.post("/login-data", function (req, res) {
-  console.log(req.body)
+  //console.log(req.body)
   res.end()
 });
 
 app.post("/create-account-data", function (req, res) {
-  console.log(req.body)
+  //console.log(req.body)
   res.end()
 });
 
 
 /**api cart */
-let itemQuantity=0;
+let itemArray=[];
+let totalitem=0;
 
 app.post("/api/cart-item-quantity", function (req, res) {
-  itemQuantity+=req.body.item;
-  if(itemQuantity<0){
-    itemQuantity=0;
+  let quantity=req.body.item;
+  let id=req.body.id;
+  let collectioname=req.body.collectionname;
+  let color=req.body.color;
+  let size=req.body.size;
+  //console.log("my id type", typeof id);
+  if(itemArray.length===0){
+    if(quantity>0){
+    totalitem+=quantity;
+    console.log("quantity debut",quantity);
+    itemArray.push({quantity:quantity, id:id, name:collectioname, color:[color], size:[size]});
+    }
   }
+  else{
+    let findid=0;
+    for(let i=0; i<itemArray.length;i++){
+      if( collectioname===itemArray[i].name && id===itemArray[i].id){
+        //itemArray[i].quantity+=quantity;
+        
+        if(itemArray[i].quantity+quantity<0){
+          //itemArray = itemArray.filter(item => item.id != id);
+          itemArray[i].quantity=0;
+        }
+        else{
+          itemArray[i].quantity+=quantity;
+          totalitem+=quantity;
+          if(quantity>0){
+            itemArray[i].color.push(color);
+            itemArray[i].size.push(size);
+          }
+          else{
+            let index=0;
+            for(let u=0; i<itemArray[i].color.length; u++){
+              if(itemArray[i].color[u]===color){
+                index=u;
+                console.log("index",index);
+                break;
+              }
+            }
+            //itemArray[i].color = itemArray[i].color.splice(index, 1); //remove itemArray[i].color[idex] 
+            //itemArray[i].size = itemArray[i].size.splice(index, 1);
+            itemArray[i].color = itemArray[i].color.filter((item,id) => id != index);
+            itemArray[i].size = itemArray[i].size.filter((item,id) => id != index);
+          }
+        }
+        
+     
+        console.log("quantity ajout mm item",quantity);
+        findid=1;
+        break;
+      }
+    }//end for
+    if(findid===0 && quantity>0){
+      console.log("quantity nouvelle item",quantity);
+      totalitem+=quantity;
+      itemArray.push({quantity:quantity, id:id,name:collectioname,color:[color], size:[size]});
+    }
+    
+  }
+  console.log("total",totalitem);
+  console.log(itemArray);
   res.end();
 });
 
-app.get("/api/cart-item-quantity",(req,res)=>{
-  res.json({"item":itemQuantity});
-  
-})
 
+app.get("/api/cart-item-quantity",(req,res)=>{
+  res.json({"item":totalitem});
+});
+
+
+app.get("/api/cart-item-quantity/:NAME/:ID",(req,res)=>{
+  let name=req.params.NAME; //NAME='fashion-men-id', 'fashion-women-id', 'skin-care-id'
+  let id=req.params.ID;
+  //console.log("typename",typeof name);
+  //console.log("typeid",typeof id);
+  let returnval=0;
+  for(let i=0; i<itemArray.length;i++){
+    if(name===itemArray[i].name  && id===itemArray[i].id.toString()){
+      returnval=itemArray[i].quantity;
+      console.log(id,name);
+      break;
+    }
+  }
+  //console.log(itemArray);
+  res.json({"currentquantity":returnval});
+});
+
+/*update product ..used in function  DecremItemadded()//the ID is important as we can have 
+multiple products in a collection->used to identify each product*/
+
+app.get("/api/cart-item-quantity/updateproduct/:NAME/:ID",(req,res)=>{
+  let name=req.params.NAME; //NAME='fashion-men-id', 'fashion-women-id', 'skin-care-id'
+  let id=req.params.ID;
+  //console.log("type id",typeof id);
+  let retval=0;
+  for(let i=0; i<itemArray.length;i++){
+    if(name===itemArray[i].name  && id===itemArray[i].id.toString()){
+      retval=itemArray[i].color.length;
+      break;
+    }
+  }
+  res.json({"currentquantity":retval});
+});
+
+
+/*get all products add to cart*/
+app.get("/api/all-products",(req,res)=>{
+  res.json({"products":itemArray});
+})
 
 /*newsletter nb: add post method to catch datas in order to send to a server*/
 
@@ -100,6 +198,8 @@ app.post("/api/product-index-skin-care", function (req, res) {
 app.get("/api/product-index-skin-care",(req,res)=>{
   res.json({"index":productIndexSkinCare, "id":productIdSkinCare});
 })
+
+
 
 
 

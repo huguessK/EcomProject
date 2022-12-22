@@ -6,16 +6,20 @@ const Product=[
         title: "title",
         colorofproducts: ["description 1","description 2","description 3","description 4"],
         description: "<p>description</p>"+ "<p>gdtudydyd dydydy</p>" + "dyydy</p>",
-        img: [ { color: "description 1",
+        img: [ { color: "im1",
+                size: "null",
                  url: "Images/SkinCare/Prod1/im1.jpg"
              },
-             { color: "description 2",
+             { color: "im2",
+             size: "null",
                  url: "Images/SkinCare/Prod1/im2.jpg"
              },
-             { color: "description 3",
+             { color: "im3",
+             size: "null",
                  url: "Images/SkinCare/Prod1/im3.jpg"
              },
-             { color: "description 4",
+             { color: "im4",
+             size: "null",
                  url: "Images/SkinCare/Prod1/im4.jpg"
              }
             ]   
@@ -27,13 +31,16 @@ const Product=[
         title: "title",
         colorofproducts: ["description 1","description 2","description 3"],
         description: " description ",
-        img: [ { color: "description 1",
+        img: [ { color: "im1",
+                size: "null",
                  url: "Images/SkinCare/Prod2/im1.jpg"
              },
-             { color: "description 2",
+             { color: "im2",
+             size: "null",
                  url: "Images/SkinCare/Prod2/im2.jpg"
              },
-             { color: "description 3",
+             { color: "im3",
+             size: "null",
                  url: "Images/SkinCare/Prod2/im3.jpg"
              }
             ]   

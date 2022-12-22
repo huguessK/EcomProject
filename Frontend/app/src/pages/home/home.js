@@ -41,7 +41,11 @@ import "./home.css";
               'Content-Type':'application/json',
             },
             body: JSON.stringify({
-              item: quantity
+              item: quantity,
+              id:props.id,
+              collectionname: props.collectionname,
+              color: props.color,
+              size: props.size
             })}).then(function(response) {
               
               return response.json();
@@ -74,15 +78,20 @@ return(
   <div class="row">
       <div class="col-12 col-sm-4">
       {<ProductComponentV1 img={BestSellingFashion[0]["img"]} name={BestSellingFashion[0]["name"]}
- description={BestSellingFashion[0]["description"]}/>}
+ description={BestSellingFashion[0]["description"]} id={1} collectionname="fashion-women"
+  color={BestSellingFashion[0]["color"]} size={BestSellingFashion[0]["size"]}/>}
       </div>
       <div class="col-12 col-sm-4">
       {<ProductComponentV1 img={BestSellingFashion[1]["img"]} name={BestSellingFashion[1]["name"]}
- description={BestSellingFashion[1]["description"]}/>}
+ description={BestSellingFashion[1]["description"]} id={1} collectionname="fashion-women"
+ color={BestSellingFashion[1]["color"]} size={BestSellingFashion[1]["size"]}
+ />}
       </div>
       <div class="col-12 col-sm-4">
       {<ProductComponentV1 img={BestSellingFashion[2]["img"]} name={BestSellingFashion[2]["name"]}
- description={BestSellingFashion[2]["description"]}/>}
+ description={BestSellingFashion[2]["description"]} id={1} collectionname="fashion-women"
+ color={BestSellingFashion[2]["color"]} size={BestSellingFashion[2]["size"]}
+ />}
       </div>
       
   </div>
@@ -100,11 +109,15 @@ return(
   <div class="row">
       <div class="col-12 col-sm-6">
       {<ProductComponentV1 img={BestSellingSkinCare[0]["img"]} name={BestSellingSkinCare[0]["name"]}
- description={BestSellingSkinCare[0]["description"]}/>}
+ description={BestSellingSkinCare[0]["description"]} id={1} collectionname="skin-care"
+ color={BestSellingSkinCare[0]["color"]} size={BestSellingSkinCare[0]["size"]}
+ />}
       </div>
       <div class="col-12 col-sm-6">
       {<ProductComponentV1 img={BestSellingSkinCare[1]["img"]} name={BestSellingSkinCare[1]["name"]}
- description={BestSellingSkinCare[1]["description"]}/>}
+ description={BestSellingSkinCare[1]["description"]} id={2} collectionname="skin-care"
+ color={BestSellingSkinCare[1]["color"]} size={BestSellingSkinCare[1]["size"]}
+ />}
       </div>
       
   </div>

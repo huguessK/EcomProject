@@ -5,6 +5,7 @@ import {Product, Size} from './product.js'
 import Parser from 'html-react-parser';
 import './fashion-women.css'
 
+
 let productindexx=0;
 
 
@@ -25,23 +26,39 @@ function ProductComponentV1(props){
 
 
   const [itemadded, setItemadded] = useState(0);
+  const [quantity, setQuantity] = useState(0);
   //const [str, setStr] = useState(itemadded.toString(10));//base 10
 
   function IncremItemadded(){
       //setStr(itemadded.toString(10)+"+");
     setItemadded(1) ;
     sendItemQuantity(1);
+    setQuantity(quantity+1);
   }
 
   
   function DecremItemadded(){
-
-      //setStr(itemadded.toString(10));
+    
       setItemadded(-1);
-      //setStr(itemadded.toString(10));
     
     sendItemQuantity(-1);
+    
+    //to remove the products added to the cart, I also check the color to remove the right product
+    //const [updateproduct, setUpdateproduct]=useState({"currentquantity":0});
+  
+      
+  fetch("/api/cart-item-quantity/updateproduct/fashion-women/"+(props.id)).then(
+    response=> response.json()
+    ).then(
+    data => {
+      //setUpdateproduct(data);
+      setQuantity(data.currentquantity);
+      }
+    )
+    
+    //setQuantity((quantity-1<=0)?0:(quantity-1));
   }
+
 
   //to get number of items added to cart
   function sendItemQuantity(quantity)
@@ -53,7 +70,11 @@ function ProductComponentV1(props){
               'Content-Type':'application/json',
             },
             body: JSON.stringify({
-              item: quantity
+              item: quantity,
+              id:props.id,
+              collectionname: "fashion-women",
+              color: props.color,
+              size: props.size
             })}).then(function(response) {
               
               return response.json();
@@ -77,7 +98,7 @@ function ProductComponentV1(props){
       },
       body: JSON.stringify({
         index: index,
-        id : props.id
+        id : props.id,
       })}).then(function(response) {
         
         return response.json();
@@ -100,7 +121,7 @@ function ProductComponentV1(props){
 
       <button className="button-fashion-page button-add-home-fashion-page" onClick={IncremItemadded}>+</button>
       <button className="button-fashion-page button-add-home-fashion-page" onClick={DecremItemadded}>-</button>
-      <button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "25%"}}>checkout</button><br/>
+      <button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "25%"}}>{quantity+props.quantity}</button><br/>
       
       <select  onChange={event => handleSelectChange(event)}>
           <option value="" disabled selected>Choose your color</option>
@@ -110,7 +131,6 @@ function ProductComponentV1(props){
       <button className="button-fashion-page button-add-home-fashion-page" >size</button>
     </div>
     
-
   </div>
   </div>
                     
@@ -124,6 +144,7 @@ Prod is a product end has the following features:
 title, name, [multiple images], name and description*/
 function CreateProduct(Prod){
 
+  //to manage the color change--product can have different colors
   const [productindex, setProductindex]=useState({"index":0, "id":1});
   useEffect(() => {
       
@@ -138,7 +159,21 @@ function CreateProduct(Prod){
         )
 
   }, [productindexx]);
-  
+
+//to get current quantity
+
+const [currentquantity, setCurrentquantity]=useState({"currentquantity":0});
+useEffect(() => {
+      
+  fetch("/api/cart-item-quantity/fashion-women/"+(Prod.id)).then(
+    response=> response.json()
+    ).then(
+    data => {
+      setCurrentquantity(data);
+      }
+    )
+
+}, []);
   
   return(
 
@@ -150,6 +185,10 @@ function CreateProduct(Prod){
     description={Prod.description}
     numberofproducts={Prod.colorofproducts.length}
     colorofproducts={Prod.colorofproducts}
+    quantity={currentquantity.currentquantity}
+    color={Prod.img[productindex.index]["color"]}
+    size={Prod.img[productindex.index]["size"]}
+    
      />
   )
 }
@@ -205,8 +244,3 @@ function FashionWomen(){
   
 
 
-
- 
-
-
- 

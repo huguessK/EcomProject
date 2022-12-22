@@ -7,9 +7,11 @@ const Product=[
         colorofproducts: ["black","camel"],
         description: "<p>description</p>"+ "<p>gdtudydyd dydydy</p>" + "dyydy</p>",
         img: [ { color: "black",
+                 size: "null",
                  url: "Images/Fashion/Men/Prod1/black.jpg"
              },
              { color: "camel",
+                size: "null",
                  url: "Images/Fashion/Men/Prod1/camel.jpg"
              }
              
@@ -23,15 +25,19 @@ const Product=[
         colorofproducts: ["beige","darkgrey","gray","red"],
         description: " description ",
         img: [ { color: "beige",
+                 size: "null",
                  url: "Images/Fashion/Men/Prod2/beige.jpg"
              },
              { color: "darkgrey",
+             size: "null",
                  url: "Images/Fashion/Men/Prod2/darkgrey.jpg"
              },
              { color: "gray",
+             size: "null",
                  url: "Images/Fashion/Men/Prod2/gray.jpg"
              },
              { color: "red",
+             size: "null",
                  url: "Images/Fashion/Men/Prod2/red.jpg"
              }
             ]   

@@ -7,15 +7,19 @@ const Product=[
         colorofproducts: ["black","burgundy","darkblue","darkgreen"],
         description: "<p>description</p>"+ "<p>gdtudydyd dydydy</p>" + "dyydy</p>",
         img: [ { color: "black",
+                size: "null",
                  url: "Images/Fashion/Women/Prod1/black.jpg"
              },
              { color: "burgundy",
+             size: "null",
                  url: "Images/Fashion/Women/Prod1/burgundy.jpg"
              },
              { color: "darkblue",
+             size: "null",
                  url: "Images/Fashion/Women/Prod1/darkblue.jpg"
              },
              { color: "darkgreen",
+             size: "null",
                  url: "Images/Fashion/Women/Prod1/darkgreen.jpg"
              }
             ]   
@@ -28,15 +32,19 @@ const Product=[
         colorofproducts: ["black","blue","purple","red"],
         description: " description ",
         img: [ { color: "black",
+                size: "null",
                  url: "Images/Fashion/Women/Prod2/black.jpg"
              },
              { color: "blue",
+             size: "null",
                  url: "Images/Fashion/Women/Prod2/blue.jpg"
              },
              { color: "purple",
+             size: "null",
                  url: "Images/Fashion/Women/Prod2/purple.jpg"
              },
              { color: "red",
+             size: "null",
                  url: "Images/Fashion/Women/Prod2/red.jpg"
              }
             ]   
@@ -49,12 +57,15 @@ const Product=[
         colorofproducts: ["colorA","colorB","colorC"],
         description: " description ",
         img: [ { color: "colorA",
+        size: "null",
                  url: "Images/Fashion/Women/Prod3/colorA.jpg"
              },
              { color: "colorB",
+             size: "null",
                  url: "Images/Fashion/Women/Prod3/colorB.jpg"
              },
              { color: "colorC",
+             size: "null",
                  url: "Images/Fashion/Women/Prod3/colorC.jpg"
              }
              
@@ -68,12 +79,15 @@ const Product=[
         colorofproducts: ["black","red","white"],
         description: " description ",
         img: [ { color: "black",
+                 size: "null",
                  url: "Images/Fashion/Women/Prod4/black.jpg"
              },
              { color: "red",
+             size: "null",
                  url: "Images/Fashion/Women/Prod4/red.jpg"
              },
              { color: "white",
+             size: "null",
                  url: "Images/Fashion/Women/Prod4/white.jpg"
              }
             ]   
