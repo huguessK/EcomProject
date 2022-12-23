@@ -27,7 +27,23 @@ const LoginForm = () => {
 
       });
       event.preventDefault();
-  }
+    }
+
+      //check for email and password in database
+
+     
+    const [loginstatus, setLoginstatus] = useState(2);
+    fetch("/login-data").then(
+      response=> response.json()
+      ).then(
+      data => {
+        setLoginstatus(data["login"]);
+        }
+      )
+      //alert(loginstatus===1);
+        if(loginstatus===1){
+          window.location.href="/"; //redirect to home
+        }
 
 
 

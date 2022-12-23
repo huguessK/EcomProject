@@ -5,6 +5,30 @@ import "./footer-header.css";
 
 function Header(valItem){
     
+
+//check if login or not
+const [loginstatus, setLoginstatus] = useState(2);
+fetch("/login-data").then(
+  response=> response.json()
+  ).then(
+  data => {
+    setLoginstatus(data["login"]);
+    }
+  )
+    let logincolor="white";
+    //change cart color if ok!
+    if(loginstatus===1){
+      logincolor="#C291A4";
+    }
+
+
+
+
+
+
+
+
+
     return (
         
     <header>
@@ -50,8 +74,8 @@ function Header(valItem){
                 <ul className="navbar-nav navbar-right icons">
                   <li><a href="/login"><i className="bi bi-person" style={{fontSize: '1.5rem'}}></i></a></li>
                   <li><a href="/question"><i className="bi bi-question-circle" style={{fontSize: '1.5rem'}}></i></a></li>
-                  <li><a href="/cart"><i className="bi bi-cart" style={{fontSize: '1.5rem'}}>
-                  <span className="cart-item" style={{color: 'white'}}><b>{valItem}</b></span>
+                  <li><a href="/cart"><i id="cart" className="bi bi-cart" style={{fontSize: '1.5rem', color:(logincolor)}}>
+                  <span className="cart-item" style={{color: (logincolor)}}><b>{valItem}</b></span>
                   </i></a></li>
                 </ul>
                 

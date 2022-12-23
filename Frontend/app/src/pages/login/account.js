@@ -26,7 +26,7 @@ const CreateForm = () => {
           address: addr,
           email: email,
           password: psw,
-          address: addr
+          phone: phone
         })}).then(function(response) {
           
           return response.json();
@@ -64,7 +64,7 @@ const CreateForm = () => {
         />
 
 <label for="phone"><b>Phone</b></label>
-        <input type="text" placeholder="Enter tel" name="phone" pattern="[0-9]{10}" value={phone} required 
+        <input type="text" placeholder="Enter tel xxxxxxxxxx" name="phone" pattern="[0-9]{10}" value={phone} required 
           onChange={(e) => setPhone(e.target.value)}
         />
 

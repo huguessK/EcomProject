@@ -6,7 +6,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 //const request = require ("request");//not used in the end
 const https= require("https");
-
+const { isDataView } = require("util/types");
+const bcrypt=require("bcrypt"); //salting and hashing passwords
+const saltRounds=10; //this value is enough
 
 //creation of new espress object
 const app= express();
@@ -16,26 +18,9 @@ app.use(express.json());
 
 
 
-app.get("/api/home",(req,res)=>{
-    res.json({"home":["home1","home2","home3"]});
-})
-
-
-
-app.post("/login-data", function (req, res) {
-  //console.log(req.body)
-  res.end()
-});
-
-app.post("/create-account-data", function (req, res) {
-  //console.log(req.body)
-  res.end()
-});
-
 
 /**api cart */
 let itemArray=[];
-let totalitem=0;
 
 app.post("/api/cart-item-quantity", function (req, res) {
   let quantity=req.body.item;
@@ -45,66 +30,76 @@ app.post("/api/cart-item-quantity", function (req, res) {
   let size=req.body.size;
   //console.log("my id type", typeof id);
   if(itemArray.length===0){
-    if(quantity>0){
-    totalitem+=quantity;
+    if(quantity===1){
     console.log("quantity debut",quantity);
-    itemArray.push({quantity:quantity, id:id, name:collectioname, color:[color], size:[size]});
+    itemArray.push({quantity:1, id:id, name:collectioname, color:[color], size:[size]});
     }
+     //else ie : quantity=-1 or quantity=-1+v where v<0 (if remove button pressed) then nothing to do
   }
-  else{
+  else{ //itemArray not null
     let findid=0;
     for(let i=0; i<itemArray.length;i++){
       if( collectioname===itemArray[i].name && id===itemArray[i].id){
-        //itemArray[i].quantity+=quantity;
-        
-        if(itemArray[i].quantity+quantity<0){
-          //itemArray = itemArray.filter(item => item.id != id);
-          itemArray[i].quantity=0;
-        }
-        else{
-          itemArray[i].quantity+=quantity;
-          totalitem+=quantity;
-          if(quantity>0){
-            itemArray[i].color.push(color);
-            itemArray[i].size.push(size);
-          }
-          else{
-            let index=0;
-            for(let u=0; i<itemArray[i].color.length; u++){
-              if(itemArray[i].color[u]===color){
-                index=u;
-                console.log("index",index);
-                break;
-              }
+
+        if(quantity===-1){
+          let findindex=-1;
+          for(let u=0; u<itemArray[i].color.length;u++){
+            if(color===itemArray[i].color[u]){
+              findindex=u;
+              break;
             }
-            //itemArray[i].color = itemArray[i].color.splice(index, 1); //remove itemArray[i].color[idex] 
-            //itemArray[i].size = itemArray[i].size.splice(index, 1);
-            itemArray[i].color = itemArray[i].color.filter((item,id) => id != index);
-            itemArray[i].size = itemArray[i].size.filter((item,id) => id != index);
           }
+          if(findindex!=-1){ //->color!=all colors in itemArray[i].color
+            itemArray[i].color = itemArray[i].color.filter((color,id) => id != findindex);
+            itemArray[i].size = itemArray[i].size.filter((size,id) => id != findindex);
+            itemArray[i].quantity-=1;
+          }//end if findindex===-1
         }
         
-     
-        console.log("quantity ajout mm item",quantity);
+        else if(quantity<-1){
+          let index=[];
+          //when remove button is pressed
+          for (let u=0; u<itemArray[i].color.length;u++){
+            if(color===itemArray[i].color[u]){
+              index.push(u);
+            }
+          }
+          const indexSet = new Set(index);
+          itemArray[i].color = itemArray[i].color.filter((value, i) => !indexSet.has(i));
+          itemArray[i].size = itemArray[i].size.filter((value, i) => !indexSet.has(i));
+          itemArray[i].quantity=itemArray[i].color.length;
+        }
+
+        else{
+          //quantity==1
+          itemArray[i].color.push(color);
+          itemArray[i].size.push(size);
+          itemArray[i].quantity+=1;
+        }
+        console.log("quantity ajout meme item ou remove",quantity);
         findid=1;
         break;
-      }
-    }//end for
-    if(findid===0 && quantity>0){
+      }// end if (collectioname===itemArray[i].name && id===itemArray[i].id)
+ 
+    } //end for
+    
+    if(findid===0 && quantity===1){
       console.log("quantity nouvelle item",quantity);
-      totalitem+=quantity;
-      itemArray.push({quantity:quantity, id:id,name:collectioname,color:[color], size:[size]});
+      itemArray.push({quantity:1, id:id,name:collectioname,color:[color], size:[size]});
     }
     
-  }
-  console.log("total",totalitem);
+  }//end else itemArray not null
   console.log(itemArray);
   res.end();
 });
 
 
 app.get("/api/cart-item-quantity",(req,res)=>{
-  res.json({"item":totalitem});
+  let totalcount=0;
+  itemArray.forEach(item => {
+    totalcount+=item.quantity;
+  });
+  res.json({"item":totalcount});
 });
 
 
@@ -150,9 +145,36 @@ app.get("/api/all-products",(req,res)=>{
 
 /*newsletter nb: add post method to catch datas in order to send to a server*/
 
-app.get("/api/newsletter",(req,res)=>{
-  res.json({"newsletterMail":req.body.newsletter});
+//discount code
+let discountcode="";
+app.post("/api/newsletter",(req,res)=>{
+  //res.json({"newsletterMail":req.body.newsletter});
+  discountcode=req.body.code;
+  const newsletterDatas = new Newsletter ({
+    email: req.body.newsletter
+  });
+  
+  newsletterDatas.save(function(err){
+    if(err){
+      res.send("something goes wrong, please try again!");
+    }
+    
+  }); //to insert in the DB
+
+  res.end();
+ 
 })
+
+
+/*dicscount code*/
+
+
+app.get("/api/discount-code",(req,res)=>{
+  res.json({"code":discountcode});
+});
+
+
+
 
 
 /*product index*/
@@ -198,6 +220,129 @@ app.post("/api/product-index-skin-care", function (req, res) {
 app.get("/api/product-index-skin-care",(req,res)=>{
   res.json({"index":productIndexSkinCare, "id":productIdSkinCare});
 })
+
+
+
+/*send datas to db*/
+
+//db setup
+
+mongoose.connect("mongodb+srv://"+process.env.MONGODB_USERNAME+":"+process.env.MONGODB_PASSWORD+"@contactmessage.3sihltd.mongodb.net/EcomprojectDB",function(err){
+  if(err){
+    console.log("connection to db failed");
+    console.log(err);
+  } else{
+
+    console.log("connection to db succeed");
+  }
+
+});
+
+
+/*account db*/
+
+const accountSchema = new mongoose.Schema ({
+  name: String,
+  firstname: String,
+  address: String,
+  email: String,
+  password: String,
+  phone: String
+});
+
+const Account = mongoose.model("Account", accountSchema);
+
+
+/*Newsletter db*/
+
+const newsletterSchema = new mongoose.Schema ({
+  email: String
+});
+
+const Newsletter = mongoose.model("Newsletter", newsletterSchema);
+
+
+/* login  */
+let loginstatus=-2;
+
+app.post("/login-data", function (req, res) {
+  console.log(req.body);
+
+    let email= req.body.email;
+    let password= req.body.password;
+ 
+    //search user in database
+    Account.findOne({email:email},function(err,foundUser){
+      if(err){
+        res.send("something goes wrong! please try again.")
+      }
+      else{
+        if(foundUser){
+            //check for password
+            bcrypt.compare(password, foundUser.password, function(err, result) {
+              if(result===true){
+                loginstatus=1;
+              }
+              else{
+                loginstatus=0;
+              }
+              res.json({"login":loginstatus});
+          }); //end bcrypt.compare
+          
+        }
+
+        //user not found
+        else{
+          loginstatus=-1;
+          res.json({"login":loginstatus});
+        }
+      }
+    })
+
+});
+
+app.get("/login-data", function (req, res) {
+  res.json({"login":loginstatus});
+});
+
+/*create account*/
+
+app.post("/create-account-data", function (req, res) {
+  console.log(req.body)
+
+  //bcrypt to salt and hash password and save the hash value in the database
+  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    
+    const accountDatas = new Account ({
+      name: req.body.name,
+      firstname: req.body.firstname,
+      address: req.body.address,
+      email: req.body.email,
+      password: hash,
+      phone: req.body.phone
+    });
+    
+    accountDatas.save(function(err){
+      if(err){
+        res.send("something goes wrong, please try again!");
+      }
+      
+    }); //to insert  in the DB
+
+});//end bcrypt.hash
+
+  res.end()
+});
+
+
+
+
+
+
+
+
+
+
 
 
 

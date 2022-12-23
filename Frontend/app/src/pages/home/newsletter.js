@@ -1,12 +1,13 @@
 import React, {useState} from "react";
-import './home.css'
-
+import './home.css';
 
 
 
 function NewsLetter(){
 
     const [email, setEmail] = useState("");
+    //generate code
+    let r = (Math.random() + 1).toString(36).substring(4);
 
     let handleSubmit = (event) => {
     
@@ -16,7 +17,8 @@ function NewsLetter(){
             'Content-Type':'application/json',
           },
           body: JSON.stringify({
-            newsletter: email
+            newsletter: email,
+            code: r
           })}).then(function(response) {
             
             return response.json();
@@ -28,9 +30,9 @@ function NewsLetter(){
         let popup = document.getElementById("myPopup");
         popup.classList.toggle("show");
 
-        //generate code
-        let r = (Math.random() + 1).toString(36).substring(4);
-        popup.innerHTML="Your code is : "+r;
+        
+        popup.innerHTML="Your code is : "+r+" this code is only valid for this session";
+
     }
 
 

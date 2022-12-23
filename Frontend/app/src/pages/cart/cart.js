@@ -1,13 +1,61 @@
 import React, {useEffect, useState} from 'react';
 import Header from '../../components/header.jsx';
 import Footer from '../../components/footer.jsx';
-
+import './cart.css'
 
 
 let cartItem=0;
-
+let fetchdata=0; //to update cart page 
 
 function ProductInCart(props){
+
+
+  function IncremItemadded(){
+    sendItemQuantity(1);
+    fetchdata=2;
+  }
+
+  
+  function DecremItemadded(){
+    sendItemQuantity(-1);
+    fetchdata=1;
+  }
+
+  function Remove(){
+    /*for(let i=0; i<props.totalcount; i++){
+      sendItemQuantity(-1);
+    }*/
+    sendItemQuantity(-props.totalcount-5); //to be sure that value always <-1 as props.totalcount>=0
+    fetchdata=3;
+  }
+
+  //to get number of items added to cart
+  function sendItemQuantity(quantity)
+  {  
+        
+    fetch("/api/cart-item-quantity", {
+            method: "POST",
+            headers :{
+              'Content-Type':'application/json',
+            },
+            body: JSON.stringify({
+              item: quantity,
+              id:props.id,
+              collectionname: props.collectionname,
+              color: props.color,
+              size: props.size
+            })}).then(function(response) {
+              
+              return response.json();
+
+          });
+          //event.preventDefault();
+  }
+
+
+
+
+
 
     return (
       <div class="container container-fashion-page text-center">
@@ -19,9 +67,9 @@ function ProductInCart(props){
     
         <div class="col-sm-6">
           <h3>Quantity Selected: {props.quantity}</h3>
-          <button className="button-fashion-page button-add-home-fashion-page" >+</button>
-          <button className="button-fashion-page button-add-home-fashion-page" >-</button>
-          <button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "25%"}}>Remove</button><br/>
+          <button className="button-fashion-page button-add-home-fashion-page" onClick={IncremItemadded}>+</button>
+          <button className="button-fashion-page button-add-home-fashion-page" onClick={DecremItemadded}>-</button>
+          <button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "25%"}}onClick={Remove}>Remove</button><br/>
         </div>
         
       </div>
@@ -32,27 +80,37 @@ function ProductInCart(props){
 
 
 
+
+
+
 function CreateProductInCart(ProductObjet){
 
   let collectionName=ProductObjet.name;
+  let size=ProductObjet.size;
   let productId=ProductObjet.id;
   let colors=ProductObjet.color;
   let quantity=ProductObjet.quantity;
   let colorCount=[];
   let NewArrayColor=[];
+  let NewArraySize=[];
   for(let i=0;i<quantity;i++){
-    let count=0;
+   
     if(NewArrayColor.includes(colors[i])===false){
       NewArrayColor.push(colors[i]);
+      NewArraySize.push(size[i]);
     }
-  colors.forEach(color => {
-    
-    if (color === colors[i]) {
-      count += 1;
+  }//endfor
+  NewArrayColor.forEach(color => {
+    let count=0;
+    for(let i=0; i<quantity;i++){
+      if (color === colors[i]) {
+        count += 1;
+      }
     }
+    colorCount.push(count);
   });
-  colorCount.push(count);
-  } 
+  
+  
 
   //let size=ProductObjet.size;
   let imgpath=[];
@@ -82,9 +140,14 @@ function CreateProductInCart(ProductObjet){
         
       <ProductInCart 
       key={index}
+      id={productId}
       img= {url}
       quantity={colorCount[index]}
       name="name"
+      collectionname={collectionName}
+      color={NewArrayColor[index]}
+      size={NewArraySize[index]}
+      totalcount={quantity}
       />);
     }))
   )
@@ -95,20 +158,24 @@ function CreateProductInCart(ProductObjet){
 
 function Cart(){
   const [backendData, setBackendData]=useState({});
-
+  
+  
   fetch("/api/cart-item-quantity").then(
   response=> response.json()
   ).then(
   data => {
     setBackendData(data)
+    //cartItem=data["item"];
     }
   )
- 
 
-  //get all products add to cart
+
+
 
   const [allproducts, setAllproducts]=useState([]);
-
+  
+    //get all products add to cart
+   
   fetch("/api/all-products").then(
     response=> response.json()
     ).then(
@@ -116,13 +183,18 @@ function Cart(){
       setAllproducts(data.products);
       }
     )
-
   
-  //let itemquantity=document.getElementsByClassName('cart-item').innerHTML;
- // alert(itemquantity);
+
+
+
+    function redirectHome(){
+      window.location.href="/";
+    }
+
     return (
       <>
       {Header(backendData["item"])}
+      {backendData["item"]===0?(<div className="emptycart"><h3 id="continue-shopping">Your cart is empty. <span style={{color:'#C291A4'}}  onClick={redirectHome}>Continue shopping</span></h3></div>):null}
       {allproducts.map(CreateProductInCart)}
       <Footer/>
       </>
