@@ -1,7 +1,9 @@
 import React,{ useState, useEffect }   from 'react';
 import Header from '../../components/header.jsx';
 import Footer from '../../components/footer.jsx';
-import './login.css'
+//import AcccountInfos from '../account-infos/account-infos.js';
+import './login.css' 
+
 
 
 const LoginForm = () => {
@@ -38,11 +40,19 @@ const LoginForm = () => {
       ).then(
       data => {
         setLoginstatus(data["login"]);
+        
         }
       )
+
+      
       //alert(loginstatus===1);
         if(loginstatus===1){
-          window.location.href="/"; //redirect to home
+
+        
+          window.location.href="/account-infos"; 
+          
+          
+         
         }
 
 

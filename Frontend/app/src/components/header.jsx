@@ -7,27 +7,19 @@ function Header(valItem){
     
 
 //check if login or not
-const [loginstatus, setLoginstatus] = useState(2);
-fetch("/login-data").then(
+const [logoutstatus, setLogoutstatus] = useState(2);
+fetch("/api/logout").then(
   response=> response.json()
   ).then(
   data => {
-    setLoginstatus(data["login"]);
+    setLogoutstatus(data["logout"]);
     }
   )
     let logincolor="white";
     //change cart color if ok!
-    if(loginstatus===1){
+    if(logoutstatus===0){
       logincolor="#C291A4";
     }
-
-
-
-
-
-
-
-
 
     return (
         

@@ -1,1 +1,12 @@
 /* same css styles as fashion-women -> no need to duplicate*/
+.sticky {
+    position: -webkit-sticky; /*Safari*/
+    position: sticky;
+    top: 0;
+  }
+
+.sticky button{
+    position: absolute;
+    right: 0;
+    width: 130px;
+}

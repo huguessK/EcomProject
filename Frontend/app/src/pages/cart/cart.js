@@ -191,9 +191,37 @@ function Cart(){
       window.location.href="/";
     }
 
+
+    let placeOrder=()=>{
+      //ask user to login or create account
+      let logoutstatus;
+      fetch("/api/logout").then(
+        response=> response.json()
+        ).then(
+        data => {
+          logoutstatus= data["logout"];
+          }
+        )
+         
+         {/* if(logoutstatus===0 && backendData["item"]>0){//if login && cart not empty
+            window.location.href="/checkout-page";
+            
+          }
+          if(logoutstatus!=0 && backendData["item"]>0 && state===-1){ 
+            window.location.href="/login"; //login or create account
+            state=2;
+          }
+        */}
+        if(backendData["item"]>0){window.location.href="/checkout-page";}
+      
+    }
+
     return (
       <>
       {Header(backendData["item"])}
+      <div className="sticky">
+          <button className="button-fashion-page button-add-home-fashion-page" onClick={placeOrder} style={{borderRadius: "10%"}}>Place Order</button>
+      </div>
       {backendData["item"]===0?(<div className="emptycart"><h3 id="continue-shopping">Your cart is empty. <span style={{color:'#C291A4'}}  onClick={redirectHome}>Continue shopping</span></h3></div>):null}
       {allproducts.map(CreateProductInCart)}
       <Footer/>

@@ -4,8 +4,9 @@ const Product=[
         id:1,
         name: "alt name",
         title: "title",
+        price: 1,
         colorofproducts: ["black","burgundy","darkblue","darkgreen"],
-        description: "<p>description</p>"+ "<p>gdtudydyd dydydy</p>" + "dyydy</p>",
+        description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "black",
                 size: "null",
                  url: "Images/Fashion/Women/Prod1/black.jpg"
@@ -29,8 +30,9 @@ const Product=[
         id:2,
         name: "alt name",
         title: "title",
+        price: 1,
         colorofproducts: ["black","blue","purple","red"],
-        description: " description ",
+        description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "black",
                 size: "null",
                  url: "Images/Fashion/Women/Prod2/black.jpg"
@@ -54,8 +56,9 @@ const Product=[
         id:3,
         name: "alt name",
         title: "title",
+        price: 1,
         colorofproducts: ["colorA","colorB","colorC"],
-        description: " description ",
+        description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "colorA",
         size: "null",
                  url: "Images/Fashion/Women/Prod3/colorA.jpg"
@@ -76,8 +79,9 @@ const Product=[
         id:4,
         name: "alt name",
         title: "title",
+        price: 1,
         colorofproducts: ["black","red","white"],
-        description: " description ",
+        description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "black",
                  size: "null",
                  url: "Images/Fashion/Women/Prod4/black.jpg"

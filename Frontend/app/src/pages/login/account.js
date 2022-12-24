@@ -33,6 +33,8 @@ const CreateForm = () => {
 
       });
       event.preventDefault();
+
+      window.location.href="/login"; 
   }
 
 

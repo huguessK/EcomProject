@@ -230,9 +230,17 @@ function SkinCare(){
   }, []);
   
   
+  let cart=()=>{
+    if(backendData["item"]>0){window.location.href="/cart";}
+  }
+
+
     return (
       <>
       {Header(backendData["item"])}
+      <div className="sticky">
+          <button className="button-fashion-page button-add-home-fashion-page" onClick={cart} style={{borderRadius: "10%"}}>Checkout</button>
+      </div>
       {ProductImages(Product)}
       <Footer/>
       </>

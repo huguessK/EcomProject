@@ -4,8 +4,9 @@ const Product=[
         id:1,
         name: "alt name",
         title: "title",
+        price: 1,
         colorofproducts: ["description 1","description 2","description 3","description 4"],
-        description: "<p>description</p>"+ "<p>gdtudydyd dydydy</p>" + "dyydy</p>",
+        description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "im1",
                 size: "null",
                  url: "Images/SkinCare/Prod1/im1.jpg"
@@ -29,8 +30,9 @@ const Product=[
         id:2,
         name: "alt name",
         title: "title",
+        price: 1,
         colorofproducts: ["description 1","description 2","description 3"],
-        description: " description ",
+        description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "im1",
                 size: "null",
                  url: "Images/SkinCare/Prod2/im1.jpg"

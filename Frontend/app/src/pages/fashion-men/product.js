@@ -4,8 +4,9 @@ const Product=[
         id:1,
         name: "alt name",
         title: "title",
+        price: 1,
         colorofproducts: ["black","camel"],
-        description: "<p>description</p>"+ "<p>gdtudydyd dydydy</p>" + "dyydy</p>",
+        description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "black",
                  size: "null",
                  url: "Images/Fashion/Men/Prod1/black.jpg"
@@ -22,8 +23,9 @@ const Product=[
         id:2,
         name: "alt name",
         title: "title",
+        price: 1,
         colorofproducts: ["beige","darkgrey","gray","red"],
-        description: " description ",
+        description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "beige",
                  size: "null",
                  url: "Images/Fashion/Men/Prod2/beige.jpg"

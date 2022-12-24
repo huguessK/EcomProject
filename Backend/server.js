@@ -112,7 +112,7 @@ app.get("/api/cart-item-quantity/:NAME/:ID",(req,res)=>{
   for(let i=0; i<itemArray.length;i++){
     if(name===itemArray[i].name  && id===itemArray[i].id.toString()){
       returnval=itemArray[i].quantity;
-      console.log(id,name);
+      //console.log(id,name);
       break;
     }
   }
@@ -145,11 +145,11 @@ app.get("/api/all-products",(req,res)=>{
 
 /*newsletter nb: add post method to catch datas in order to send to a server*/
 
-//discount code
-let discountcode="";
+let discountcode=[];
+
 app.post("/api/newsletter",(req,res)=>{
   //res.json({"newsletterMail":req.body.newsletter});
-  discountcode=req.body.code;
+  discountcode.push(req.body.code);
   const newsletterDatas = new Newsletter ({
     email: req.body.newsletter
   });
@@ -170,11 +170,85 @@ app.post("/api/newsletter",(req,res)=>{
 
 
 app.get("/api/discount-code",(req,res)=>{
-  res.json({"code":discountcode});
+  res.json({"code":discountcode}); //discountcode=[code1,code2] or [code1]
 });
 
 
+/* get account-datas*/
 
+app.get("/account-datas",(req,res)=>{
+//console.log("myuser",useremail);
+  Account.findOne({email:useremail},function(err,foundUser){
+    if(err){
+      res.send("something goes wrong! please try again.")
+    }
+    else{ 
+      if(foundUser){//should normally always be true
+        console.log("usuerfound");
+        let data={nam:foundUser.name,
+          firstname: foundUser.firstname,
+          email: foundUser.email,
+          phone: foundUser.phone,
+          address: foundUser.address
+        };
+        console.log(data);
+        res.json(data);
+      }
+      else{
+        console.log("not found");
+        //console.log("mail",useremail);
+      }
+    } 
+      
+    });
+
+});
+
+
+/*update*/
+app.post("/update",(req,res)=>{
+
+let pwd="";
+if(req.body.password!=""){//if user have changed password
+  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    if(err){
+      console.log(err);
+    }
+    else{
+      pwd=hash;
+    }
+  });//end bcrypt.hash
+}
+
+
+  Account.findOne({email:req.body.email},function(err,foundUser){
+    if(err){
+      res.send("something goes wrong! please try again.")
+    }
+    else{
+      if(foundUser){
+        foundUser.address=req.body.address;
+        if(pwd!=""){foundUser.password=pwd;} //hash value
+        foundUser.phone=req.body.phone;
+
+        foundUser.markModified("address");
+        if(pwd!=""){ foundUser.markModified("password");}
+        foundUser.markModified("phone");
+
+        foundUser.save(function(err){
+          if(err){
+            console.log("updatError",err);
+            res.send("something goes wrong, please try again!");
+          }
+          
+        });
+
+        res.end();
+      }
+    } 
+});
+
+});
 
 
 /*product index*/
@@ -264,13 +338,17 @@ const Newsletter = mongoose.model("Newsletter", newsletterSchema);
 
 /* login  */
 let loginstatus=-2;
+let useremail="";
+let logout=-1;
 
 app.post("/login-data", function (req, res) {
   console.log(req.body);
 
     let email= req.body.email;
+    useremail=email;
     let password= req.body.password;
  
+    
     //search user in database
     Account.findOne({email:email},function(err,foundUser){
       if(err){
@@ -282,10 +360,15 @@ app.post("/login-data", function (req, res) {
             bcrypt.compare(password, foundUser.password, function(err, result) {
               if(result===true){
                 loginstatus=1;
+                logout=0;
+               
               }
               else{
                 loginstatus=0;
+                logout=-2;
               }
+
+              
               res.json({"login":loginstatus});
           }); //end bcrypt.compare
           
@@ -294,6 +377,7 @@ app.post("/login-data", function (req, res) {
         //user not found
         else{
           loginstatus=-1;
+          logout=-3;
           res.json({"login":loginstatus});
         }
       }
@@ -305,10 +389,18 @@ app.get("/login-data", function (req, res) {
   res.json({"login":loginstatus});
 });
 
+
+/*logout*/
+
+app.get("/api/logout",function(req,res){
+  res.json({"logout":logout});
+});
+
+
 /*create account*/
 
 app.post("/create-account-data", function (req, res) {
-  console.log(req.body)
+  //console.log(req.body)
 
   //bcrypt to salt and hash password and save the hash value in the database
   bcrypt.hash(req.body.password, saltRounds, function(err, hash) {

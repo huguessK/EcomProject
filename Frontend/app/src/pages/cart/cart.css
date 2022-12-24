@@ -6,3 +6,15 @@ height: 200px;
 #continue-shopping:hover{
     cursor:pointer;
 }
+
+.sticky {
+    position: -webkit-sticky; /*Safari*/
+    position: sticky;
+    top: 0;
+  }
+
+.sticky button{
+    position: absolute;
+    right: 0;
+    width: 130px;
+}

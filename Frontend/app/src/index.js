@@ -14,6 +14,8 @@ import Cart from "./pages/cart/cart.js";
 import Question from "./pages/question/question.js";
 import SkinCare from "./pages/skin-care/skin-care.js";
 import About from "./pages/about/about.js";
+import Checkout from "./pages/checkout-page/checkout-page.js";
+import AcccountInfos from "./pages/account-infos/account-infos.js";
 //import { cartItem } from './pages/cart/cart.js';//count number of items in cart
 
 export default function Ap() {
@@ -34,6 +36,8 @@ export default function Ap() {
           <Route path="cart" element={<Cart/>} />
           <Route path="question" element={<Question />} />
           <Route path="skin-care" element={<SkinCare />} />
+          <Route path="account-infos" element={<AcccountInfos />} />
+          <Route path="checkout-page" element={<Checkout />} />
         </Route>
       </Routes>
     </BrowserRouter>
