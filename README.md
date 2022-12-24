@@ -23,7 +23,7 @@ So don't hesitate to come and have a look from time to time to see my progress.
 Once the project is done, the site will be live so that you could see the final result.
 
 
-Project progress:
+        My progress on the project
 
 
 completed tasks:
@@ -48,5 +48,5 @@ tasks to be performed:
 - site to be responsive 
 
 
-I will add cookies (sessions), once the project is 100% complete. 
+        I will add cookies (sessions), once the project is 100% complete. 
 
