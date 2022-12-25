@@ -38,7 +38,7 @@ completed tasks:
 - navigate on the different pages of the site
 - dynamic update of the cart when a product is added or removed 
 - possibility to subscribe to the newsletter and get a promo code
-- create a payment gateway using paypal api
+- create a payment gateway using paypal SDK
 
 
 tasks to be performed:
