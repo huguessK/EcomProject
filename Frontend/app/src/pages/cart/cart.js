@@ -7,6 +7,7 @@ import './cart.css'
 let cartItem=0;
 let fetchdata=0; //to update cart page 
 
+
 function ProductInCart(props){
 
 
@@ -77,8 +78,6 @@ function ProductInCart(props){
                         
   )
 }
-
-
 
 
 
@@ -203,16 +202,14 @@ function Cart(){
           }
         )
          
-         {/* if(logoutstatus===0 && backendData["item"]>0){//if login && cart not empty
+          if(logoutstatus===0 && backendData["item"]>0){//if login && cart not empty
             window.location.href="/checkout-page";
-            
           }
-          if(logoutstatus!=0 && backendData["item"]>0 && state===-1){ 
-            window.location.href="/login"; //login or create account
-            state=2;
+          else{ 
+            if(backendData["item"]>0){window.location.href="/login";} //login or create account}
           }
-        */}
-        if(backendData["item"]>0){window.location.href="/checkout-page";}
+        
+       // if(backendData["item"]>0){window.location.href="/checkout-page";}
       
     }
 
@@ -230,8 +227,8 @@ function Cart(){
     )
   };
   
-  export default Cart;
-  export {cartItem};
+export default Cart;
+export {cartItem};
 
 
 

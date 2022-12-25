@@ -5,6 +5,7 @@ const Product=[
         name: "alt name",
         title: "title",
         price: 1,
+        sizearray: ["XL", "2XL", "3XL", "4XL", "5XL"],
         colorofproducts: ["black","burgundy","darkblue","darkgreen"],
         description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "black",
@@ -31,6 +32,7 @@ const Product=[
         name: "alt name",
         title: "title",
         price: 1,
+        sizearray: ["XL", "2XL", "3XL", "4XL", "5XL"],
         colorofproducts: ["black","blue","purple","red"],
         description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "black",
@@ -57,6 +59,7 @@ const Product=[
         name: "alt name",
         title: "title",
         price: 1,
+        sizearray: ["XL", "2XL", "3XL", "4XL", "5XL"],
         colorofproducts: ["colorA","colorB","colorC"],
         description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "colorA",
@@ -80,6 +83,7 @@ const Product=[
         name: "alt name",
         title: "title",
         price: 1,
+        sizearray: ["XL", "2XL", "3XL", "4XL", "5XL"],
         colorofproducts: ["black","red","white"],
         description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "black",
@@ -99,5 +103,5 @@ const Product=[
     
 ]
 
-const Size= "Images/Fashion/Women/Prod4/size.jpg";
+const Size= "Images/Size/size2.jpg";
 export {Product,Size};

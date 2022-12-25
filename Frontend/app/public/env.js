@@ -1,0 +1,3 @@
+window.env = {
+  "PAYPAL_CLIENT_ID": "AZFtMjUoW0kuEbgwDNWVkKWB3TeH9DP-S-F6g3yBAOKbDdIrFSbuZeoyDivSjuHUhYNWVCaFgWPNhRu1"
+};

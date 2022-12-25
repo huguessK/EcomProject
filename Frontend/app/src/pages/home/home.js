@@ -16,52 +16,18 @@ import "./home.css";
   const [itemadded, setItemadded] = useState(0);
   //const [str, setStr] = useState(itemadded.toString(10));//base 10
 
-  function IncremItemadded(){
+  let Shop=(link)=>{
       //setStr(itemadded.toString(10)+"+");
-    setItemadded(1) ;
-    sendItemQuantity(1);
+      window.location.href=link; 
   }
 
   
-  function DecremItemadded(){
-
-      //setStr(itemadded.toString(10));
-      setItemadded(-1);
-      //setStr(itemadded.toString(10));
-    
-    sendItemQuantity(-1);
-  }
-
-  function sendItemQuantity(quantity)
-  {  
-        
-    fetch("/api/cart-item-quantity", {
-            method: "POST",
-            headers :{
-              'Content-Type':'application/json',
-            },
-            body: JSON.stringify({
-              item: quantity,
-              id:props.id,
-              collectionname: props.collectionname,
-              color: props.color,
-              size: props.size
-            })}).then(function(response) {
-              
-              return response.json();
-
-          });
-          setItemadded(0);
-          //event.preventDefault();
-  }
-
-
 
     return (
       <div className="ProductComponentV1">
         <img src={props.img} alt={props.name}></img>
         <p>{props.description}</p>
-        <button className="button button-add-home" onClick={IncremItemadded}>Add to cart</button>
+        <button className="button button-add-home" onClick={()=>Shop(props.link)}>Shop</button>
       </div>
     )
   }
@@ -79,18 +45,18 @@ return(
       <div class="col-12 col-sm-4">
       {<ProductComponentV1 img={BestSellingFashion[0]["img"]} name={BestSellingFashion[0]["name"]}
  description={BestSellingFashion[0]["description"]} id={1} collectionname="fashion-women"
-  color={BestSellingFashion[0]["color"]} size={BestSellingFashion[0]["size"]}/>}
+  color={BestSellingFashion[0]["color"]} size={BestSellingFashion[0]["size"]} link="/fashion-women"/>}
       </div>
       <div class="col-12 col-sm-4">
       {<ProductComponentV1 img={BestSellingFashion[1]["img"]} name={BestSellingFashion[1]["name"]}
  description={BestSellingFashion[1]["description"]} id={1} collectionname="fashion-women"
- color={BestSellingFashion[1]["color"]} size={BestSellingFashion[1]["size"]}
+ color={BestSellingFashion[1]["color"]} size={BestSellingFashion[1]["size"]} link="/fashion-women"
  />}
       </div>
       <div class="col-12 col-sm-4">
       {<ProductComponentV1 img={BestSellingFashion[2]["img"]} name={BestSellingFashion[2]["name"]}
  description={BestSellingFashion[2]["description"]} id={1} collectionname="fashion-women"
- color={BestSellingFashion[2]["color"]} size={BestSellingFashion[2]["size"]}
+ color={BestSellingFashion[2]["color"]} size={BestSellingFashion[2]["size"]} link="/fashion-women"
  />}
       </div>
       
@@ -110,13 +76,13 @@ return(
       <div class="col-12 col-sm-6">
       {<ProductComponentV1 img={BestSellingSkinCare[0]["img"]} name={BestSellingSkinCare[0]["name"]}
  description={BestSellingSkinCare[0]["description"]} id={1} collectionname="skin-care"
- color={BestSellingSkinCare[0]["color"]} size={BestSellingSkinCare[0]["size"]}
+ color={BestSellingSkinCare[0]["color"]} size={BestSellingSkinCare[0]["size"]} link="/skin-care"
  />}
       </div>
       <div class="col-12 col-sm-6">
       {<ProductComponentV1 img={BestSellingSkinCare[1]["img"]} name={BestSellingSkinCare[1]["name"]}
  description={BestSellingSkinCare[1]["description"]} id={2} collectionname="skin-care"
- color={BestSellingSkinCare[1]["color"]} size={BestSellingSkinCare[1]["size"]}
+ color={BestSellingSkinCare[1]["color"]} size={BestSellingSkinCare[1]["size"]} link="/skin-care"
  />}
       </div>
       

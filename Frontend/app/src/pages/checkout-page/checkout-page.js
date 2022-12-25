@@ -88,11 +88,12 @@ const Checkout=()=>{
           }
         )
 
+
     return(
         <>
          {Header(backendData["item"])}
          <div className="sticky">
-          <button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "10%", color:"#C291A4"}}><i class="bi bi-paypal"></i></button>
+          <button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "10%", color:"#C291A4"}} onClick={()=>{window.open("/payment-page", '_blank', 'noopener,noreferrer')}}><i class="bi bi-paypal"></i></button>
       </div>
         <div className="order-recap">
         <h1>Order recap</h1>

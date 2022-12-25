@@ -5,6 +5,7 @@ const Product=[
         name: "alt name",
         title: "title",
         price: 1,
+        sizearray:[26, 27, 28, 29, 30, 32, 34, 36],
         colorofproducts: ["black","camel"],
         description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "black",
@@ -24,6 +25,7 @@ const Product=[
         name: "alt name",
         title: "title",
         price: 1,
+        sizearray:[26, 27, 28, 29, 30, 32, 34, 36],
         colorofproducts: ["beige","darkgrey","gray","red"],
         description: "<p>Lorem ipsum dolor sit amet</p>"+ "<p>price: $1</p>",
         img: [ { color: "beige",
@@ -50,4 +52,6 @@ const Product=[
 ]
 
 
+const Size= "Images/Size/size1.webp";
 export default Product;
+export {Size};

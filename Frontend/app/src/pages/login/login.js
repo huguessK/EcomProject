@@ -47,12 +47,9 @@ const LoginForm = () => {
       
       //alert(loginstatus===1);
         if(loginstatus===1){
-
-        
-          window.location.href="/account-infos"; 
+          //window.location.href="/account-infos"; 
+          window.location.href="/payment-page"; 
           
-          
-         
         }
 
 

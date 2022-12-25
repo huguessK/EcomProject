@@ -19,12 +19,22 @@ function Option(imglength,text){
  
 }
 
+function OptionSize(sizearray){
+
+  let str='';
+  for(let i=0; i<sizearray.length;i++){
+    str+='<option value='+(i)+'>'+sizearray[i]+'</option>';
+  }
+  return (Parser(str));
+ 
+}
+
 
 /* start ProductComponentV1*/
 
 function ProductComponentV1(props){
 
-
+  const [selectedsize, SetSelectedsize] = useState("null");
   const [itemadded, setItemadded] = useState(0);
   const [quantity, setQuantity] = useState(0);
   //const [str, setStr] = useState(itemadded.toString(10));//base 10
@@ -74,7 +84,7 @@ function ProductComponentV1(props){
               id:props.id,
               collectionname: "fashion-women",
               color: props.color,
-              size: props.size
+              size: selectedsize
             })}).then(function(response) {
               
               return response.json();
@@ -85,6 +95,16 @@ function ProductComponentV1(props){
   }
 
 
+  function handleSelectChangeSize(event){
+    let value = event.target.value;
+    //alert(value);
+    SetSelectedsize(value);
+    
+  }
+
+
+
+  
   function handleSelectChange(event){
     let value = event.target.value;
     const searchindex = (element) => element ===value;
@@ -128,7 +148,13 @@ function ProductComponentV1(props){
           {Option(props.numberofproducts,props.colorofproducts)}
           
       </select>
-      <button className="button-fashion-page button-add-home-fashion-page" >size</button>
+
+      <select  onChange={event => handleSelectChangeSize(event)}>
+          <option value="" disabled selected>Choose your size</option>
+          {OptionSize(props.sizearray)}
+          
+      </select>
+      {/*<button className="button-fashion-page button-add-home-fashion-page" >size</button>*/}
     </div>
     
   </div>
@@ -188,6 +214,7 @@ useEffect(() => {
     quantity={currentquantity.currentquantity}
     color={Prod.img[productindex.index]["color"]}
     size={Prod.img[productindex.index]["size"]}
+    sizearray={Prod.sizearray}
     
      />
   )
@@ -229,9 +256,15 @@ function FashionWomen(){
   return () => clearInterval(interval);//fetch number of items added to cart each 0.5s
   }, []);
   
-
   let cart=()=>{
     if(backendData["item"]>0){window.location.href="/cart";}
+  }
+
+
+
+  let SeeSize=()=>{
+    window.open("/sizewomen", '_blank', 'noopener,noreferrer');
+
   }
   
     return (
@@ -239,6 +272,7 @@ function FashionWomen(){
       {Header(backendData["item"])}
       <div className="sticky">
           <button className="button-fashion-page button-add-home-fashion-page" onClick={cart} style={{borderRadius: "10%"}}>Checkout</button>
+          <button className="button-fashion-page button-add-home-fashion-page see-size" onClick={SeeSize} style={{borderRadius: "10%"}}>See Size</button>
       </div>
       {ProductImages(Product)}
       <Footer/>
@@ -249,5 +283,3 @@ function FashionWomen(){
   
   export default FashionWomen;
   
-
-

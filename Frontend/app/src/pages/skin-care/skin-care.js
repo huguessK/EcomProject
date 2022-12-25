@@ -20,11 +20,13 @@ function Option(imglength,text){
 }
 
 
+
+
 /* start ProductComponentV1*/
 
 function ProductComponentV1(props){
 
-
+  const [selectedsize, SetSelectedsize] = useState("null");
   const [itemadded, setItemadded] = useState(0);
   const [quantity, setQuantity] = useState(0);
   //const [str, setStr] = useState(itemadded.toString(10));//base 10
@@ -74,7 +76,7 @@ function ProductComponentV1(props){
               id:props.id,
               collectionname: "skin-care",
               color: props.color,
-              size: props.size
+              size: selectedsize
             })}).then(function(response) {
               
               return response.json();
@@ -85,6 +87,16 @@ function ProductComponentV1(props){
   }
 
 
+  function handleSelectChangeSize(event){
+    let value = event.target.value;
+    //alert(value);
+    SetSelectedsize(value);
+    
+  }
+
+
+
+  
   function handleSelectChange(event){
     let value = event.target.value;
     const searchindex = (element) => element ===value;
@@ -124,11 +136,13 @@ function ProductComponentV1(props){
       <button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "25%"}}>{quantity+props.quantity}</button><br/>
       
       <select  onChange={event => handleSelectChange(event)}>
-          <option value="" disabled selected>Choose your color</option>
+          <option value="" disabled selected>See description</option>
           {Option(props.numberofproducts,props.colorofproducts)}
           
       </select>
-      <button className="button-fashion-page button-add-home-fashion-page" >size</button>
+
+      
+      {/*<button className="button-fashion-page button-add-home-fashion-page" >size</button>*/}
     </div>
     
   </div>
@@ -189,6 +203,7 @@ useEffect(() => {
     color={Prod.img[productindex.index]["color"]}
     size={Prod.img[productindex.index]["size"]}
     
+    
      />
   )
 }
@@ -229,12 +244,10 @@ function SkinCare(){
   return () => clearInterval(interval);//fetch number of items added to cart each 0.5s
   }, []);
   
-  
   let cart=()=>{
     if(backendData["item"]>0){window.location.href="/cart";}
   }
-
-
+  
     return (
       <>
       {Header(backendData["item"])}
@@ -250,5 +263,3 @@ function SkinCare(){
   
   export default SkinCare;
   
-
-

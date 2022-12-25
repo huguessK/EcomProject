@@ -49,3 +49,10 @@
     right: 0;
     width: 130px;
 }
+
+.see-size{
+  position: absolute;
+  right: 0;
+  top:  80px; /*to position See Size button under Checkout button*/
+  width: 130px;
+}

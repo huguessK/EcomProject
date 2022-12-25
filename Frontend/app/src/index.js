@@ -14,8 +14,10 @@ import Cart from "./pages/cart/cart.js";
 import Question from "./pages/question/question.js";
 import SkinCare from "./pages/skin-care/skin-care.js";
 import About from "./pages/about/about.js";
+import {SizeMen, SizeWomen} from "./pages/size/size.js";
 import Checkout from "./pages/checkout-page/checkout-page.js";
 import AcccountInfos from "./pages/account-infos/account-infos.js";
+import Paypal from "./pages/paypal/paypal.js";
 //import { cartItem } from './pages/cart/cart.js';//count number of items in cart
 
 export default function Ap() {
@@ -38,6 +40,9 @@ export default function Ap() {
           <Route path="skin-care" element={<SkinCare />} />
           <Route path="account-infos" element={<AcccountInfos />} />
           <Route path="checkout-page" element={<Checkout />} />
+          <Route path="sizemen" element={<SizeMen />} />
+          <Route path="sizewomen" element={<SizeWomen />} />
+          <Route path="payment-page" element={<Paypal />} />
         </Route>
       </Routes>
     </BrowserRouter>
