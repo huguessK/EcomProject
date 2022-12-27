@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const https= require("https");
 const { isDataView } = require("util/types");
 const bcrypt=require("bcrypt"); //salting and hashing passwords
+const { fchownSync } = require("fs");
 const saltRounds=10; //this value is enough
 
 //creation of new espress object
@@ -99,7 +100,7 @@ app.get("/api/cart-item-quantity",(req,res)=>{
   itemArray.forEach(item => {
     totalcount+=item.quantity;
   });
-  res.json({"item":totalcount});
+  res.json({"item":totalcount, "login":loginstatus});
 });
 
 
@@ -148,26 +149,60 @@ app.get("/api/all-products",(req,res)=>{
 let discountcode=[];
 
 app.post("/api/newsletter",(req,res)=>{
-  //res.json({"newsletterMail":req.body.newsletter});
-  discountcode.push(req.body.code);
-  const newsletterDatas = new Newsletter ({
-    email: req.body.newsletter
-  });
   
-  newsletterDatas.save(function(err){
+  //check if email already exists in database
+
+  Newsletter.findOne({email: req.body.newsletter},function(err,foundUser){
     if(err){
-      res.send("something goes wrong, please try again!");
+      res.send("something goes wrong! please try again.")
     }
-    
-  }); //to insert in the DB
+    else{
+      //only insert in db if user not found
+      if(!foundUser){
+        discountcode.push(req.body.code);
+        const newsletterDatas = new Newsletter ({
+          email: req.body.newsletter
+        });
+      
+        
+        newsletterDatas.save(function(err){
+          if(err){
+            res.send("something goes wrong, please try again!");
+          }
+          else{
+            console.log("email added to newsletter db");
+          }
+        }); //to insert in the DB
+        
+      }
+      else{
+        console.log("this email already exists in newsletter db")
+      }
+      
+    }
+  })//end Newsletter
 
   res.end();
  
 })
 
 
-/*dicscount code*/
+  
+//price 
 
+let price="";
+app.post("/api/price",(req,res)=>{
+ price=req.body.price;
+ res.end();
+})
+
+app.get("/api/price",(req,res)=>{
+  res.json({"price":price});
+ })
+ 
+
+
+/*dicscount code*/
 
 app.get("/api/discount-code",(req,res)=>{
   res.json({"code":discountcode}); //discountcode=[code1,code2] or [code1]
@@ -360,16 +395,16 @@ app.post("/login-data", function (req, res) {
             bcrypt.compare(password, foundUser.password, function(err, result) {
               if(result===true){
                 loginstatus=1;
-                logout=0;
+                logout=1;
                
               }
               else{
                 loginstatus=0;
-                logout=-2;
+                logout=0;
               }
 
               
-              res.json({"login":loginstatus});
+              
           }); //end bcrypt.compare
           
         }
@@ -377,12 +412,12 @@ app.post("/login-data", function (req, res) {
         //user not found
         else{
           loginstatus=-1;
-          logout=-3;
-          res.json({"login":loginstatus});
+          logout=0;
+          
         }
       }
     })
-
+    res.end();
 });
 
 app.get("/login-data", function (req, res) {
@@ -392,48 +427,64 @@ app.get("/login-data", function (req, res) {
 
 /*logout*/
 
+
 app.get("/api/logout",function(req,res){
-  res.json({"logout":logout});
+    res.json({"logout":logout});
 });
 
 
-/*create account*/
+/*create account - 
+create a new account if the email is not already used in another account*/
+let AccountEmailAlredayUsed; 
 
 app.post("/create-account-data", function (req, res) {
   //console.log(req.body)
 
-  //bcrypt to salt and hash password and save the hash value in the database
-  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-    
-    const accountDatas = new Account ({
-      name: req.body.name,
-      firstname: req.body.firstname,
-      address: req.body.address,
-      email: req.body.email,
-      password: hash,
-      phone: req.body.phone
-    });
-    
-    accountDatas.save(function(err){
-      if(err){
-        res.send("something goes wrong, please try again!");
+  Account.findOne({email:req.body.email},function(err,foundUser){
+    if(err){
+      res.send("something goes wrong! please try again.")
+    }
+    else{
+      if(foundUser){
+        AccountEmailAlredayUsed=1;
+        console.log("email already used")
       }
-      
-    }); //to insert  in the DB
 
-});//end bcrypt.hash
+      else{
+        AccountEmailAlredayUsed=0;
+        //user not found
+        //bcrypt to salt and hash password and save the hash value in the database
+        bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+          
+          const accountDatas = new Account ({
+            name: req.body.name,
+            firstname: req.body.firstname,
+            address: req.body.address,
+            email: req.body.email,
+            password: hash,
+            phone: req.body.phone
+          });
+          
+          accountDatas.save(function(err){
+            if(err){
+              res.send("something goes wrong, please try again!");
+            }
+            
+          }); //to insert  in the DB
+
+          });//end bcrypt.hash
+            }
+          }
+  })//end Account.findOne
 
   res.end()
 });
 
 
 
-
-
-
-
-
-
+app.get("/create-account-data", function (req, res) {
+  res.json({"alreadyused":AccountEmailAlredayUsed});
+});
 
 
 

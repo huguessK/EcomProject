@@ -237,7 +237,8 @@ return(
 
 function FashionMen(){
   const [backendData, setBackendData]=useState({});
-
+  const [login, setLogin]=useState(0);
+  
   useEffect(() => {
 
     const interval = setInterval(() => {
@@ -246,7 +247,8 @@ function FashionMen(){
         response=> response.json()
         ).then(
         data => {
-          setBackendData(data)
+          setBackendData(data);
+          setLogin(data.login);
           }
         )
 
@@ -257,7 +259,13 @@ function FashionMen(){
   }, []);
   
   let cart=()=>{
-    if(backendData["item"]>0){window.location.href="/cart";}
+    
+    if(backendData["item"]>0 && login===1){window.location.href="/cart";}
+    else{
+      if(login!=1){
+        window.location.href="/login"
+      }
+    }
   }
 
   let SeeSize=()=>{

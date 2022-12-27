@@ -56,3 +56,12 @@ font-size: 11px;
 .row h6>a{
     color: white;
 }
+
+.login:hover{
+    cursor: pointer;
+}
+
+
+.about:hover, .contact:hover, .faq:hover{
+    cursor: pointer;
+}

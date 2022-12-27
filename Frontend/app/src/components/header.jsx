@@ -1,25 +1,45 @@
 
-import React,{ useState }   from 'react'; //remove useState if not used
+import React,{ useState, useEffect}   from 'react'; //remove useState if not used
 import "./footer-header.css";
 
 
 function Header(valItem){
-    
 
 //check if login or not
 const [logoutstatus, setLogoutstatus] = useState(2);
+const [logincolor, setColor] = useState("white");
+
+useEffect(() => {
+  const interval = setInterval(() => {
 fetch("/api/logout").then(
   response=> response.json()
   ).then(
   data => {
     setLogoutstatus(data["logout"]);
+    if(data["logout"]===1){
+      setColor("#C291A4");
+    }
+    else{
+      setColor("white");
+    }
     }
   )
-    let logincolor="white";
-    //change cart color if ok!
-    if(logoutstatus===0){
-      logincolor="#C291A4";
+
+}, 500);
+  
+  return () => clearInterval(interval);//fetch number of items added to cart each 0.5s
+}, []);
+
+
+  function handlelogin(){
+    if(logoutstatus===1){//if login =true
+      window.location.href="/account-infos";
     }
+    else{
+      window.location.href="/login";
+    }
+  }
+
 
     return (
         
@@ -59,12 +79,12 @@ fetch("/api/logout").then(
               
                     
                     </li> {/*Fashion tag for Products item */}
-                    <li className="nav-item"><a style={{color: 'white'}} className="nav-link active" href="/about">About me</a></li>
-                    <li className="nav-item"><a style={{color: 'white'}} className="nav-link active" href="/contact">Contact me</a></li>
+                    <li className="nav-item"><a style={{color: 'white'}} className="nav-link active" href="/about">About</a></li>
+                    <li className="nav-item"><a style={{color: 'white'}} className="nav-link active" href="/contact">Contact</a></li>
                 </ul>
 
                 <ul className="navbar-nav navbar-right icons">
-                  <li><a href="/login"><i className="bi bi-person" style={{fontSize: '1.5rem'}}></i></a></li>
+                  <li className="login"><a  onClick={()=>handlelogin()}><i className="bi bi-person" style={{fontSize: '1.5rem', color:(logincolor)}} ></i></a></li>
                   <li><a href="/question"><i className="bi bi-question-circle" style={{fontSize: '1.5rem'}}></i></a></li>
                   <li><a href="/cart"><i id="cart" className="bi bi-cart" style={{fontSize: '1.5rem', color:(logincolor)}}>
                   <span className="cart-item" style={{color: (logincolor)}}><b>{valItem}</b></span>

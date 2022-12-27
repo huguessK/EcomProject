@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './home.css';
 
 
@@ -10,37 +10,39 @@ function NewsLetter(){
     let r = (Math.random() + 1).toString(36).substring(4);
 
     let handleSubmit = (event) => {
-    
-        fetch("/api/newsletter", {
-          method: "POST",
-          headers :{
-            'Content-Type':'application/json',
-          },
-          body: JSON.stringify({
-            newsletter: email,
-            code: r
-          })}).then(function(response) {
-            
-            return response.json();
-    
-        });
-        event.preventDefault();
 
-        //show code
+    //post email and discount code r to the server for processing
+    if(email!=""){
+      fetch("/api/newsletter", {
+        method: "POST",
+        headers :{
+          'Content-Type':'application/json',
+        },
+        body: JSON.stringify({
+          newsletter: email,
+          code: r
+        })}).then(function(response) {
+          
+          return response.json();
+  
+      });
+        event.preventDefault();
+    }
+     
+
+        //show code or message
         let popup = document.getElementById("myPopup");
         popup.classList.toggle("show");
+        popup.innerHTML="you have subscribed to the newsletter";
+      }
+   
 
-        
-        popup.innerHTML="Your code is : "+r+" this code is only valid for this session";
-
-    }
-
-
+  
     return (
       <div className="newsletter-subscribe mt-5 container">
           <div className="container">
               <div className="intro">
-                  <h2 className="text-center newsletter">Subscribe to our Newsletter and get a 10% discount code </h2>
+                  <h2 className="text-center newsletter">Subscribe to our Newsletter and get 10% discount on your cart </h2>
                   <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
               <form className="form-inline" onSubmit={handleSubmit} method="post">

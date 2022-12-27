@@ -225,7 +225,8 @@ return(
 
 function SkinCare(){
   const [backendData, setBackendData]=useState({});
-
+  const [login, setLogin]=useState(0);
+  
   useEffect(() => {
 
     const interval = setInterval(() => {
@@ -234,7 +235,8 @@ function SkinCare(){
         response=> response.json()
         ).then(
         data => {
-          setBackendData(data)
+          setBackendData(data);
+          setLogin(data.login);
           }
         )
 
@@ -245,8 +247,16 @@ function SkinCare(){
   }, []);
   
   let cart=()=>{
-    if(backendData["item"]>0){window.location.href="/cart";}
+    
+    if(backendData["item"]>0 && login===1){window.location.href="/cart";}
+    else{
+      if(login!=1){
+        window.location.href="/login"
+      }
+    }
   }
+  
+
   
     return (
       <>

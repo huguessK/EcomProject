@@ -17,7 +17,7 @@ import About from "./pages/about/about.js";
 import {SizeMen, SizeWomen} from "./pages/size/size.js";
 import Checkout from "./pages/checkout-page/checkout-page.js";
 import AcccountInfos from "./pages/account-infos/account-infos.js";
-import Paypal from "./pages/paypal/paypal.js";
+import Paypal from './pages/paypal/paypal';
 //import { cartItem } from './pages/cart/cart.js';//count number of items in cart
 
 export default function Ap() {

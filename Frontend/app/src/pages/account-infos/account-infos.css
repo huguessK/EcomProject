@@ -1,6 +1,6 @@
 .accountinfos{
     padding-top: 10px;
-    height: auto; 
+    min-height: 400px;
 }
 
 .accountinfos h1{

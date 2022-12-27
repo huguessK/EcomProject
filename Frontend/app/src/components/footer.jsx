@@ -3,8 +3,22 @@ import "./footer-header.css";
 
 {/*contact page, about page, terms and conditions page...*/}
 function Footer(){
-    return (
-       
+
+function handleAbout(){
+    window.location.href="/about";
+}
+
+
+function handleContact(){
+    window.location.href="/contact";
+}
+
+function handleFaq(){
+    window.location.href="/question";
+}
+
+
+return (
 <footer className="foot">
 
 <div class="container text-center">
@@ -22,8 +36,9 @@ function Footer(){
       </div>
 
       <div class="col-4">
-      <h6><a href="##">about me</a></h6>
-      <h6><a href="##">contact me</a></h6>
+      <h6><a className="about" style={{color:'white'}} onClick={()=>handleAbout()}>about</a></h6>
+      <h6><a className="contact" style={{color:'white'}} onClick={()=>handleContact()}>contact</a></h6>
+      <h6><a className="faq" style={{color:'white'}} onClick={()=>handleFaq()}>FAQ</a></h6>
       </div> 
 
       

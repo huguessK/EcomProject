@@ -6,10 +6,6 @@ import './account-infos.css'
 
 
 
-
-
-
-
 function Setting(){
   
 
@@ -171,9 +167,6 @@ fetch("/api/all-products").then(
 const InfosToDisplay=()=>{
 
   
-
-
-
   const [backendData, setBackendData]=useState({});
 
   useEffect(() => {
@@ -196,17 +189,15 @@ const InfosToDisplay=()=>{
 
 
 
-
-
-  let handleClick=()=>{
-    
+  function handleClick(){
+     
     fetch("/login-data", {
       method: "POST",
       headers :{
         'Content-Type':'application/json',
       },
       body: JSON.stringify({
-        email: "",
+        email: "email",
         password: "",
         remember: false
       })}).then(function(response) {
@@ -214,6 +205,7 @@ const InfosToDisplay=()=>{
         return response.json();
 
     });
+  
   
     window.location.href="/";
   }
@@ -228,7 +220,7 @@ const InfosToDisplay=()=>{
      <div className="nav nav-tabs" id="nav-tab" role="tablist">
        <button className="nav-link active" id="nav-orders-tab" data-bs-toggle="tab" data-bs-target="#nav-orders" type="button" role="tab" aria-controls="nav-orders" aria-selected="true">Orders Placed</button>
        <button className="nav-link" id="nav-setting-tab" data-bs-toggle="tab" data-bs-target="#nav-setting" type="button" role="tab" aria-controls="nav-setting" aria-selected="false">Setting</button>
-       <button className="nav-link" id="nav-logout-tab" data-bs-toggle="tab" data-bs-target="#nav-logout" type="button" role="tab" aria-controls="nav-logout" aria-selected="false" onClick={handleClick}>Log out</button>
+       <button className="nav-link" id="nav-logout-tab" data-bs-toggle="tab" data-bs-target="#nav-logout" type="button" role="tab" aria-controls="nav-logout" aria-selected="false" onClick={()=>handleClick()}>Log out</button>
      </div>
    </nav>
  

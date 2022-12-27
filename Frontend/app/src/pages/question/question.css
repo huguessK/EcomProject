@@ -1,0 +1,26 @@
+.question{
+    min-height: 400px;
+}
+
+.accordion-container{
+    display: flex;
+    justify-content: center;
+}
+
+
+.faq-text{
+    display: flex;
+    justify-content: center;
+}
+
+.accordion-title{
+    width: 200px;
+}
+
+.plus-minus{
+    font-size: 25px;
+}
+
+.plus-minus:hover{
+    cursor: pointer;
+}

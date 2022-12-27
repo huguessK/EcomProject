@@ -11,6 +11,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [psw, setPsw] = useState("");
   const [remember, setRemember] = useState("false");
+  const [failedmessage, setFailedMessage] = useState("");
   
   let handleSubmit = (event) => {
     
@@ -40,20 +41,18 @@ const LoginForm = () => {
       ).then(
       data => {
         setLoginstatus(data["login"]);
+        if(data["login"]===1){setFailedMessage("");}
+        else{setFailedMessage("Please enter your email and password");}
         
         }
       )
 
-      
-      //alert(loginstatus===1);
         if(loginstatus===1){
-          //window.location.href="/account-infos"; 
-          window.location.href="/payment-page"; 
-          
+          let previousPage=document.referrer;
+          window.location.href=previousPage;
         }
 
-
-
+        
   return(
   <div className="form-container">
   <form onSubmit={handleSubmit}>
@@ -62,7 +61,9 @@ const LoginForm = () => {
       </div>
 
       <div className="container">
-        <label for="email"><b>Email</b></label>
+      {(loginstatus!=1)?(<p id="loginFailed">{failedmessage}</p> ):null}
+      
+      <label for="email"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" value={email} required 
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -81,7 +82,7 @@ const LoginForm = () => {
 
       <div className="container" style={{backgroundColor:"#f1f1f1"}}>
         
-        <span className="psw">Forgot <a href="#">password?</a></span>
+        {/*<span className="psw">Forgot <a href="#">password?</a></span>*/}
         <p>Don't have an account? <a href="/create-account">Create account</a></p>
       </div>
     </form>

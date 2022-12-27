@@ -6,7 +6,7 @@ import PaypalSetup from './paypal-app.js'
 
 const Paypal=()=>{
 
-    const [backendData, setBackendData]=useState({});
+    /*const [backendData, setBackendData]=useState({});
     
     fetch("/api/cart-item-quantity").then(
         response=> response.json()
@@ -14,14 +14,14 @@ const Paypal=()=>{
         data => {
           setBackendData(data)
           }
-        )
+        )*/
 
     return(
         <>
-         {Header(backendData["item"])}
+         {/*{Header(backendData["item"])}*/}
          <PaypalSetup/>
        
-        <Footer/>
+        {/*<Footer/>*/}
         </>
     )
 };

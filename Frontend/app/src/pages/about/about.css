@@ -1,0 +1,16 @@
+.about{
+    min-height: 400px;
+}
+
+.textcontainer{
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.mytext{
+    position: absolute;
+    top: 50px;
+   
+}

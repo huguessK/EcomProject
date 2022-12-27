@@ -3,9 +3,14 @@ import Header from '../../components/header.jsx';
 import Footer from '../../components/footer.jsx';
 
 import './checkout-page.css'
+import Product from '../fashion-men/product.js';
 
 
 
+
+
+
+//let amount; //for paypal
 
 function CreateProductInfos(ProductObjet){
     let collectionName=ProductObjet.name;
@@ -32,8 +37,6 @@ function CreateProductInfos(ProductObjet){
       }
       colorCount.push(count);
     });
-  
-  
     
     return (
       (NewArrayColor.map((color,index)=>{
@@ -45,6 +48,8 @@ function CreateProductInfos(ProductObjet){
               <p>color: {color}</p>
               <p>quantity: {colorCount[index]}</p>
               <p>size: {NewArraySize[index]}</p>
+              <p>price: ${Product[productId].price}</p>
+              
             </div>
           </div>
   
@@ -88,17 +93,50 @@ const Checkout=()=>{
           }
         )
 
+    //automatic discount of 10% if the user subscribed to the newsletter
+  
+    const [reductionPercentage, setReduction]=useState(1);
+    fetch("/api/discount-code").then(
+      response=> response.json()
+      ).then(
+      data => {
+        if(data.code.length!=0){
+          setReduction(10); 
+          
+        }
+
+        fetch("/api/price", {
+          method: "POST",
+          headers :{
+            'Content-Type':'application/json',
+          },
+          body: JSON.stringify({
+            price: (reductionPercentage>1)?(backendData["item"]*(1-(1/reductionPercentage))):backendData["item"]
+        
+          })}).then(function(response) {
+            
+            return response.json();
+
+        });
+
+    })     
+      
 
     return(
         <>
          {Header(backendData["item"])}
+        {
          <div className="sticky">
-          <button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "10%", color:"#C291A4"}} onClick={()=>{window.open("/payment-page", '_blank', 'noopener,noreferrer')}}><i class="bi bi-paypal"></i></button>
+         {(backendData["item"]>0)?
+          (<button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "10%", color:"#C291A4"}} onClick={()=>{window.open("/payment-page", '_blank', 'noopener,noreferrer')}}><i class="bi bi-paypal"></i></button>):null}
       </div>
-        <div className="order-recap">
+        }
+        <div className="order-recap middle">
         <h1>Order recap</h1>
             <Orders/>
-            <h3>Total: ${backendData["item"]}</h3> {/* each item cost $1 so Total=numberOfItems*/}
+            <h3>Total: ${backendData["item"]}</h3> {/* each item cost $1 so Total=$numberOfItems*/}
+            {(reductionPercentage===10)?
+              ( <h3>Final Total ({reductionPercentage}% off): ${backendData["item"]*(1-(1/reductionPercentage))}</h3>):null}
         </div>
        
         <Footer/>

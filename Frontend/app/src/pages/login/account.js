@@ -34,9 +34,19 @@ const CreateForm = () => {
       });
       event.preventDefault();
 
-      window.location.href="/login"; 
-  }
+      //check if the email used to create the account already exists in the database
 
+      fetch("/create-account-data").then(
+        response=> response.json()
+        ).then(
+        data => {
+          if(data.alreadyused===0){
+            //account have been created -> redirect user to login page
+            window.location.href="/login"; 
+          }
+          }
+        )
+  }
 
 
   return(
@@ -69,8 +79,6 @@ const CreateForm = () => {
         <input type="text" placeholder="Enter tel xxxxxxxxxx" name="phone" pattern="[0-9]{10}" value={phone} required 
           onChange={(e) => setPhone(e.target.value)}
         />
-
-
 
         <label for="email"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" value={email} required 
@@ -128,8 +136,6 @@ const CreateAccounte = () => {
       )
 
 }
-
-
 
 
 
