@@ -4,7 +4,7 @@ The functionalities of the site are the following:
 
 - create an account or login 
 - make purchases on the site
-- subscribe to the newsletter and get a discount code
+- subscribe to the newsletter and get a discount 
 - possibility to pay with paypal or credit card 
 - possibility to contact me via a form to fill
 
@@ -28,7 +28,7 @@ Once the project is done, the site will be live so that you could see the final 
 
 completed tasks:
 
-- the front and back end of the site are 85% complete
+- the front and back end of the site are 93% complete
 - create an account or login (using the email and password used to create account)
 - log out 
 - change the account password, address or phone number
@@ -37,14 +37,14 @@ completed tasks:
 - recap of products added to cart and total price
 - navigate on the different pages of the site
 - dynamic update of the cart when a product is added or removed 
-- possibility to subscribe to the newsletter and get a promo code
+- possibility to subscribe to the newsletter and get a discount
 - create a payment gateway using paypal SDK
+- added faq, about and contact pages
 
 
 tasks to be performed:
 
 - store the invoices (after payment) in the account so that the user can consult the orders placed at any time.
-- a contact page
 - site to be responsive 
 
 
