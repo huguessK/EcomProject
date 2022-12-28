@@ -34,8 +34,8 @@ const LoginForm = () => {
 
       //check for email and password in database
 
-     
     const [loginstatus, setLoginstatus] = useState(2);
+
     fetch("/login-data").then(
       response=> response.json()
       ).then(
@@ -43,7 +43,6 @@ const LoginForm = () => {
         setLoginstatus(data["login"]);
         if(data["login"]===1){setFailedMessage("");}
         else{setFailedMessage("Please enter your email and password");}
-        
         }
       )
 
@@ -51,8 +50,7 @@ const LoginForm = () => {
           let previousPage=document.referrer;
           window.location.href=previousPage;
         }
-
-        
+           
   return(
   <div className="form-container">
   <form onSubmit={handleSubmit}>
@@ -74,6 +72,7 @@ const LoginForm = () => {
         />
 
         <button type="submit">Login</button>
+        
         <label>
           <input type="checkbox"  name="remember" value={remember}
             onChange={() => setRemember("true")}/> Remember me

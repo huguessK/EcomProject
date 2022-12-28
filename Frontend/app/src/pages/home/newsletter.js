@@ -26,17 +26,29 @@ function NewsLetter(){
           return response.json();
   
       });
-        event.preventDefault();
+       
     }
      
-
+    let popup = document.getElementById("myPopup");
+      function PopupText(){
+        
         //show code or message
-        let popup = document.getElementById("myPopup");
         popup.classList.toggle("show");
         popup.innerHTML="you have subscribed to the newsletter";
-      }
-   
+        
 
+        //hide message after 1 second
+        setTimeout(function() {
+          popup.classList.toggle("popuptext");
+          popup.innerHTML="";
+          setEmail("");
+            }, 1000);
+          
+      };//end function PopupText
+
+      PopupText();
+      event.preventDefault();
+    }
   
     return (
       <div className="newsletter-subscribe mt-5 container">

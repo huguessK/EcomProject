@@ -128,7 +128,7 @@ const Checkout=()=>{
         {
          <div className="sticky">
          {(backendData["item"]>0)?
-          (<button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "10%", color:"#C291A4"}} onClick={()=>{window.open("/payment-page", '_blank', 'noopener,noreferrer')}}><i class="bi bi-paypal"></i></button>):null}
+          (<button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "10%", color:"#C291A4"}} onClick={()=>{window.location.href="/payment-page";}}><i class="bi bi-paypal"></i></button>):null}
       </div>
         }
         <div className="order-recap middle">

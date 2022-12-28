@@ -72,3 +72,8 @@ span.psw {
 
 /*account form css ...*/
 
+#emailused{
+  font-weight: bold;
+  font-size: 15px;
+  color: red;
+}

@@ -14,6 +14,8 @@ const [accountdatas, setAccountdatas] = useState({});
 const [addr, setAddr] = useState("");
 const [phone, setPhone] = useState(""); 
 const [pawd, setPawd] = useState(""); 
+let currentAddr;
+let currentPhone;
 
 useEffect(() => {
 fetch("/account-datas").then(
@@ -23,6 +25,8 @@ fetch("/account-datas").then(
     setAccountdatas(data);
     setAddr(data.address);
     setPhone(data.phone);
+    currentAddr=addr;
+    currentPhone=phone;
     
     }
   )
@@ -31,6 +35,7 @@ fetch("/account-datas").then(
 
 function Update(){
   
+  if(addr!=currentAddr || phone!=currentPhone || pawd!=""){
   let data={
     email:accountdatas.email,
     address: addr,
@@ -49,7 +54,18 @@ function Update(){
       return response.json();
 
   });
-}
+
+//show message "Saved!"
+document.getElementById('saved').innerHTML="Saved!";
+
+setTimeout(function() {
+  document.getElementById('saved').innerHTML="";
+    }, 1000);
+  
+    }//end if
+}//end Update
+
+
 
 
 
@@ -82,10 +98,9 @@ function Update(){
         />
 
       
-
-        <button type="button" onClick={Update()}>save changes</button>
-
-
+        
+        <button type="button" onClick={()=>Update()}>save changes</button>
+        <span id="saved"></span>
 
     </div>
     </>
@@ -127,11 +142,12 @@ function CreateProductInfos(ProductObjet){
           return(
             <div>
               <div className="prod">
-                <p>name={collectionName}</p>
-                <p>id={productId}</p>
-                <p>color={color}</p>
-                <p>quantity={colorCount[index]}</p>
-                <p>size={NewArraySize[index]}</p>
+                <p>category: {collectionName}</p>
+                <p>id: {productId}</p>
+                <p>color: {color}</p>
+                <p>quantity: {colorCount[index]}</p>
+                <p>size: {NewArraySize[index]}</p>
+                <h3 id="continue-shopping" style={{color:'#C291A4'}} onClick={()=>{ window.location.href="/checkout-page";}}>Checkout</h3>
               </div>
             </div>
     
@@ -157,7 +173,9 @@ fetch("/api/all-products").then(
 
  return(
   <>
-   {allproducts.map(CreateProductInfos)}
+   { (allproducts.length!=0)?(allproducts.map(CreateProductInfos)):
+    (<h3 id="continue-shopping">No order to display. <span style={{color:'#C291A4'}}  onClick={()=>{ window.location.href="/";}}>Continue shopping</span></h3>)
+    }
    </>
  )
  }

@@ -11,3 +11,9 @@
 .prod{
     padding-bottom: 10px;
 }
+
+
+#saved{
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -40,10 +40,18 @@ const CreateForm = () => {
         response=> response.json()
         ).then(
         data => {
-          if(data.alreadyused===0){
-            //account have been created -> redirect user to login page
-            window.location.href="/login"; 
-          }
+              if(data.alreadyused===0){
+                //account have been created -> redirect user to login page
+                window.location.href="/login"; 
+              }
+              else{//email already used 
+                              
+                    document.getElementById('emailused').innerHTML="This email is already used";
+
+                    setTimeout(function() {
+                      document.getElementById('emailused').innerHTML="";
+                        }, 3000);
+              }
           }
         )
   }
@@ -76,7 +84,7 @@ const CreateForm = () => {
         />
 
 <label for="phone"><b>Phone</b></label>
-        <input type="text" placeholder="Enter tel xxxxxxxxxx" name="phone" pattern="[0-9]{10}" value={phone} required 
+        <input type="text" placeholder="Enter tel 0033 00000000" name="phone" pattern="[0-9]{20}" value={phone} required 
           onChange={(e) => setPhone(e.target.value)}
         />
 
@@ -91,6 +99,7 @@ const CreateForm = () => {
         />
 
         <button type="submit">Create account</button>
+        <span id="emailused"></span>
         
       </div>
 

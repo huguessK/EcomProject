@@ -45,7 +45,7 @@ fetch("/api/logout").then(
         
     <header>
     <div className="header-banner">
-      <b><p>Order by 01/25 for free shipping! This offer is valid for orders over Є30.</p></b>
+      <b><p>Order by 12/25 for free shipping! This offer is valid for orders over $xx.</p></b>
     </div>
 
     <div className="navigation-bar">

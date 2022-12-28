@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/App';
 //import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
