@@ -15,7 +15,7 @@ Other features could be added as the project progresses.
 The technologies I will use for this project:
 
 - backend : Node.js, Express.js, mongodb/mongoose
-- frontend: React.js, React hook, React components, React props, jsx, css, html, bootstrap, Material-UI (maybe)
+- frontend: React.js, React hook, React components, React props, jsx, css, html, bootstrap
 - vs code as editor
 
 I'll do some 'git push' as I go along on my project. 
@@ -28,7 +28,7 @@ Once the project is done, the site will be live so that you could see the final 
 
 completed tasks:
 
-- the front and back end of the site are 93% complete
+- the front and back end of the site are 100% complete
 - create an account or login (using the email and password used to create account)
 - log out 
 - change the account password, address or phone number
@@ -40,13 +40,12 @@ completed tasks:
 - possibility to subscribe to the newsletter and get a discount
 - create a payment gateway using paypal SDK
 - added faq, about and contact pages
-
+- the site is fully functional for screens wider than 1108px
 
 tasks to be performed:
 
-- store the invoices (after payment) in the account so that the user can consult the orders placed at any time.
-- site to be responsive 
+- site to be responsive (for screen width < 1108px)
 
 
-        I will add cookies (sessions), once the project is 100% complete. 
+        I will add session cookies once the site is fully responsive.
 
