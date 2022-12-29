@@ -38,7 +38,7 @@ function ProductComponentV1(props){
   const [selectedcolor, SetColor] = useState(Array(Product.length).fill("null"));
   const [itemadded, setItemadded] = useState(0);
   const [quantity, setQuantity] = useState(0);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(1);
   //const [str, setStr] = useState(itemadded.toString(10));//base 10
 
   function IncremItemadded(){

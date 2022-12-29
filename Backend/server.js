@@ -213,7 +213,7 @@ app.get("/api/discount-code",(req,res)=>{
 
 
 /* get account-datas*/
-
+let userEmail;
 app.get("/account-datas",(req,res)=>{
 //console.log("myuser",useremail);
   Account.findOne({email:useremail},function(err,foundUser){
@@ -223,6 +223,7 @@ app.get("/account-datas",(req,res)=>{
     else{ 
       if(foundUser){//should normally always be true
         console.log("usuerfound");
+        userEmail=foundUser.email;
         let data={nam:foundUser.name,
           firstname: foundUser.firstname,
           email: foundUser.email,
@@ -491,7 +492,22 @@ app.get("/create-account-data", function (req, res) {
 
 
 
-
+/*delete account*/
+app.post("/delete-account",function(req,res){
+  console.log("useremail",userEmail);
+//delete account
+  Account.deleteOne({ email: userEmail }, function (err) {
+            if (err) {
+               console.log("an error occurred while trying to delete the account");
+            }
+            else{
+              console.log("an account was deleted");
+            }
+            
+          });
+       
+res.end();
+});
 
 
 var port = process.env.PORT;

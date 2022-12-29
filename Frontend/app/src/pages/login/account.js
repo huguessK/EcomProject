@@ -12,8 +12,10 @@ const CreateForm = () => {
   const [nam, setName] = useState("");
   const [firstname, setFirstname] = useState("");
   const [phone, setPhone] = useState("");
+ 
   
   let handleSubmit = (event) => {
+    
     
       fetch("/create-account-data", {
         method: "POST",
@@ -32,10 +34,12 @@ const CreateForm = () => {
           return response.json();
 
       });
+      
       event.preventDefault();
 
       //check if the email used to create the account already exists in the database
 
+      setTimeout(function() {
       fetch("/create-account-data").then(
         response=> response.json()
         ).then(
@@ -53,7 +57,8 @@ const CreateForm = () => {
                         }, 3000);
               }
           }
-        )
+        )//end fetch
+      }, 1000);
   }
 
 
@@ -84,7 +89,7 @@ const CreateForm = () => {
         />
 
 <label for="phone"><b>Phone</b></label>
-        <input type="text" placeholder="Enter tel 0033 00000000" name="phone" pattern="[0-9]{20}" value={phone} required 
+        <input type="text" placeholder="Enter tel 0033XXXXXX" name="phone" pattern="[0-9]+" title="Only number is allowed, no space" value={phone} required 
           onChange={(e) => setPhone(e.target.value)}
         />
 

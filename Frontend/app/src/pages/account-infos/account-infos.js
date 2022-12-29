@@ -66,9 +66,6 @@ setTimeout(function() {
 }//end Update
 
 
-
-
-
     return(
       <>
       <h1>settings</h1>
@@ -97,8 +94,6 @@ setTimeout(function() {
            onChange={(e) => setPawd(e.target.value)}
         />
 
-      
-        
         <button type="button" onClick={()=>Update()}>save changes</button>
         <span id="saved"></span>
 
@@ -106,7 +101,6 @@ setTimeout(function() {
     </>
     )
 }
-
 
 
 function CreateProductInfos(ProductObjet){
@@ -207,6 +201,22 @@ const InfosToDisplay=()=>{
   }, []);
 
 
+function handleDelete(){
+
+ fetch("/delete-account", {
+   method: "POST",
+     headers :{
+        'Content-Type':'application/json',
+      },
+      body: JSON.stringify({
+        email: "deleteaccount"
+        })}).then(function(response) {
+                  
+       return response.json();
+          
+    });
+     window.location.href="/";
+}
 
   function handleClick(){
      
@@ -240,6 +250,7 @@ const InfosToDisplay=()=>{
        <button className="nav-link active" id="nav-orders-tab" data-bs-toggle="tab" data-bs-target="#nav-orders" type="button" role="tab" aria-controls="nav-orders" aria-selected="true">Orders Placed/Current Orders</button>
        <button className="nav-link" id="nav-setting-tab" data-bs-toggle="tab" data-bs-target="#nav-setting" type="button" role="tab" aria-controls="nav-setting" aria-selected="false">Setting</button>
        <button className="nav-link" id="nav-logout-tab" data-bs-toggle="tab" data-bs-target="#nav-logout" type="button" role="tab" aria-controls="nav-logout" aria-selected="false" onClick={()=>handleClick()}>Log out</button>
+       <button className="nav-link" id="nav-logout-tab" data-bs-toggle="tab" data-bs-target="#nav-logout" type="button" role="tab" aria-controls="nav-logout" aria-selected="false" onClick={()=>handleDelete()}>Delete account</button>
      </div>
    </nav>
  

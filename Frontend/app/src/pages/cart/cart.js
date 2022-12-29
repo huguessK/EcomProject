@@ -157,13 +157,14 @@ function CreateProductInCart(ProductObjet){
 
 function Cart(){
   const [backendData, setBackendData]=useState({});
-  
+  const [login, setLogin]=useState(0);
   
   fetch("/api/cart-item-quantity").then(
   response=> response.json()
   ).then(
   data => {
     setBackendData(data)
+    setLogin(data.login);
     //cartItem=data["item"];
     }
   )
@@ -192,8 +193,13 @@ function Cart(){
 
 
     let placeOrder=()=>{
-          if(backendData["item"]>0){//if login && cart not empty
+          if(backendData["item"]>0 &&login===1){//if login && cart not empty
             window.location.href="/checkout-page";
+          }
+          else{
+            if(login!=1){
+              window.location.href="/login"
+            }
           }
     }
 
