@@ -34,8 +34,8 @@ function OptionSize(sizearray){
 
 function ProductComponentV1(props){
 
-  const [selectedsize, SetSelectedsize] = useState(["null","null"]);
-  const [selectedcolor, SetColor] = useState(["null","null"]);
+  const [selectedsize, SetSelectedsize] = useState(Array(Product.length).fill("null"));
+  const [selectedcolor, SetColor] = useState(Array(Product.length).fill("null"));
   const [itemadded, setItemadded] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [id, setId] = useState(0);
@@ -43,7 +43,7 @@ function ProductComponentV1(props){
 
   function IncremItemadded(){
     //setStr(itemadded.toString(10)+"+");
-  if(id===1){
+  if(id!=0){
     if(!(selectedcolor[id-1].includes("null") || selectedsize[id-1].includes("null")))
     {
       
@@ -54,19 +54,6 @@ function ProductComponentV1(props){
     else{
         alert("Please choose your size or color");
     }
-  }
-
-  else{//as the product does not have a size property
-    if(!(selectedcolor[id-1].includes("null")))
-  {
-    
-      setItemadded(1) ;
-      sendItemQuantity(1);
-      setQuantity(quantity+1);
-  }
-  else{
-      alert("Please choose your color");
-  }
   }
   
 }

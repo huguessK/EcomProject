@@ -34,8 +34,8 @@ function OptionSize(sizearray){
 
 function ProductComponentV1(props){
 
-  const [selectedsize, SetSelectedsize] = useState(["null","null"]);
-  const [selectedcolor, SetColor] = useState(["null","null"]);
+  const [selectedsize, SetSelectedsize] = useState(Array(Product.length).fill("null"));
+  const [selectedcolor, SetColor] = useState(Array(Product.length).fill("null"));
   const [itemadded, setItemadded] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [id, setId] = useState(0);
