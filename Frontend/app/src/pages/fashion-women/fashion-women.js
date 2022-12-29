@@ -34,18 +34,42 @@ function OptionSize(sizearray){
 
 function ProductComponentV1(props){
 
-  const [selectedsize, SetSelectedsize] = useState("null");
+  const [selectedsize, SetSelectedsize] = useState(["null","null"]);
+  const [selectedcolor, SetColor] = useState(["null","null"]);
   const [itemadded, setItemadded] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  const [id, setId] = useState(0);
   //const [str, setStr] = useState(itemadded.toString(10));//base 10
 
   function IncremItemadded(){
-      //setStr(itemadded.toString(10)+"+");
-    setItemadded(1) ;
-    sendItemQuantity(1);
-    setQuantity(quantity+1);
+    //setStr(itemadded.toString(10)+"+");
+  if(id===1){
+    if(!(selectedcolor[id-1].includes("null") || selectedsize[id-1].includes("null")))
+    {
+      
+        setItemadded(1) ;
+        sendItemQuantity(1);
+        setQuantity(quantity+1);
+    }
+    else{
+        alert("Please choose your size or color");
+    }
   }
 
+  else{//as the product does not have a size property
+    if(!(selectedcolor[id-1].includes("null")))
+  {
+    
+      setItemadded(1) ;
+      sendItemQuantity(1);
+      setQuantity(quantity+1);
+  }
+  else{
+      alert("Please choose your color");
+  }
+  }
+  
+}
   
   function DecremItemadded(){
     
@@ -84,7 +108,7 @@ function ProductComponentV1(props){
               id:props.id,
               collectionname: "fashion-women",
               color: props.color,
-              size: selectedsize
+              size: selectedsize[id-1]
             })}).then(function(response) {
               
               return response.json();
@@ -98,15 +122,15 @@ function ProductComponentV1(props){
   function handleSelectChangeSize(event){
     let value = event.target.value;
     //alert(value);
-    SetSelectedsize(value);
-    
+    selectedsize.splice(id-1, 1, value);    
   }
 
 
 
-  
   function handleSelectChange(event){
     let value = event.target.value;
+    selectedcolor.splice(id-1, 1, value);
+
     const searchindex = (element) => element ===value;
     let index=props.colorofproducts.findIndex(searchindex);
     productindexx+=1;
@@ -139,17 +163,17 @@ function ProductComponentV1(props){
       <h3>{props.title}</h3>
       <p>{Parser(props.description)}</p>
 
-      <button className="button-fashion-page button-add-home-fashion-page" onClick={IncremItemadded}>+</button>
-      <button className="button-fashion-page button-add-home-fashion-page" onClick={DecremItemadded}>-</button>
+      <button className="button-fashion-page button-add-home-fashion-page" onClick={()=>{setId(props.id); IncremItemadded()}}>+</button>
+      {/*<button className="button-fashion-page button-add-home-fashion-page" onClick={DecremItemadded}>-</button>*/}
       <button className="button-fashion-page button-add-home-fashion-page" style={{borderRadius: "25%"}}>{quantity+props.quantity}</button><br/>
       
-      <select  onChange={event => handleSelectChange(event)}>
+      <select  onChange={event => {setId(props.id); handleSelectChange(event)}}>
           <option value="" disabled selected>Choose your color</option>
           {Option(props.numberofproducts,props.colorofproducts)}
           
       </select>
 
-      <select  onChange={event => handleSelectChangeSize(event)}>
+      <select  onChange={event =>{setId(props.id); handleSelectChangeSize(event)}}>
           <option value="" disabled selected>Choose your size</option>
           {OptionSize(props.sizearray)}
           

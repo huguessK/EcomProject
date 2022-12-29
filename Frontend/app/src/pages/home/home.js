@@ -191,7 +191,7 @@ const Home = () => {
 
  
   //get the number of items added
-  const [backendData, setBackendData]=useState({"item":0});
+  const [backendData, setBackendData]=useState({"item":0,"login":0});
 
   useEffect(() => {
 

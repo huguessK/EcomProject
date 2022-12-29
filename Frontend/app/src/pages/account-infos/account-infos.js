@@ -142,12 +142,13 @@ function CreateProductInfos(ProductObjet){
           return(
             <div>
               <div className="prod">
-                <p>category: {collectionName}</p>
-                <p>id: {productId}</p>
-                <p>color: {color}</p>
-                <p>quantity: {colorCount[index]}</p>
-                <p>size: {NewArraySize[index]}</p>
-                <h3 id="continue-shopping" style={{color:'#C291A4'}} onClick={()=>{ window.location.href="/checkout-page";}}>Checkout</h3>
+                <p>Category: {collectionName}</p>
+                <p>Id: {productId}</p>
+                {(!collectionName.includes("skin"))?
+                (<><p>Color: {color}</p> <p>Size: {NewArraySize[index]}</p></>):null
+              }
+                <p>Quantity: {colorCount[index]}</p>
+                <button id="continue-shopping" style={{backgroundColor:'#C291A4', color:'white', fontSize:'20px', width:'180px'}} onClick={()=>{ window.location.href="/checkout-page";}}>Checkout</button>
               </div>
             </div>
     
@@ -236,7 +237,7 @@ const InfosToDisplay=()=>{
    <h1>Welcome</h1>
    <nav>
      <div className="nav nav-tabs" id="nav-tab" role="tablist">
-       <button className="nav-link active" id="nav-orders-tab" data-bs-toggle="tab" data-bs-target="#nav-orders" type="button" role="tab" aria-controls="nav-orders" aria-selected="true">Orders Placed</button>
+       <button className="nav-link active" id="nav-orders-tab" data-bs-toggle="tab" data-bs-target="#nav-orders" type="button" role="tab" aria-controls="nav-orders" aria-selected="true">Orders Placed/Current Orders</button>
        <button className="nav-link" id="nav-setting-tab" data-bs-toggle="tab" data-bs-target="#nav-setting" type="button" role="tab" aria-controls="nav-setting" aria-selected="false">Setting</button>
        <button className="nav-link" id="nav-logout-tab" data-bs-toggle="tab" data-bs-target="#nav-logout" type="button" role="tab" aria-controls="nav-logout" aria-selected="false" onClick={()=>handleClick()}>Log out</button>
      </div>

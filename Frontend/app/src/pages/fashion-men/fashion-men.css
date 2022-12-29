@@ -17,3 +17,7 @@
   top:  80px; /*to position See Size button under Checkout button*/
   width: 130px;
 }
+
+/*#size-color-selected{
+  color: #C291A4;
+} (if I use a popup message)*/

@@ -8,8 +8,6 @@ import Product from '../fashion-men/product.js';
 
 
 
-
-
 //let amount; //for paypal
 
 function CreateProductInfos(ProductObjet){
@@ -43,12 +41,14 @@ function CreateProductInfos(ProductObjet){
         return(
           <div>
             <div className="prod">
-              <p>category: {collectionName}</p>
-              <p>id: {productId}</p>
-              <p>color: {color}</p>
-              <p>quantity: {colorCount[index]}</p>
-              <p>size: {NewArraySize[index]}</p>
-              <p>price: ${Product[productId].price}</p>
+              <p>Category: {collectionName}</p>
+              <p>Id: {productId}</p>
+              {(!collectionName.includes("skin"))?
+                (<><p>Color: {color}</p> <p>Size: {NewArraySize[index]}</p></>):null
+              }
+              
+              <p>Quantity: {colorCount[index]}</p>
+              <p>Price: ${Product[productId].price}</p>
               
             </div>
           </div>

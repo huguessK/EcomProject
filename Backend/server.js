@@ -97,9 +97,12 @@ app.post("/api/cart-item-quantity", function (req, res) {
 
 app.get("/api/cart-item-quantity",(req,res)=>{
   let totalcount=0;
-  itemArray.forEach(item => {
-    totalcount+=item.quantity;
-  });
+  if(itemArray.length!=0){
+    itemArray.forEach(item => {
+      totalcount+=item.quantity;
+    });
+  }
+  
   res.json({"item":totalcount, "login":loginstatus});
 });
 
@@ -382,7 +385,7 @@ app.post("/login-data", function (req, res) {
     let email= req.body.email;
     useremail=email;
     let password= req.body.password;
- 
+    //if(email.includes("email")){itemArray=[];}
     
     //search user in database
     Account.findOne({email:email},function(err,foundUser){
@@ -396,6 +399,7 @@ app.post("/login-data", function (req, res) {
               if(result===true){
                 loginstatus=1;
                 logout=1;
+                
                
               }
               else{
@@ -413,7 +417,6 @@ app.post("/login-data", function (req, res) {
         else{
           loginstatus=-1;
           logout=0;
-          
         }
       }
     })
