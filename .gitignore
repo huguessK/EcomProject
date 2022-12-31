@@ -71,6 +71,9 @@ web_modules/
 # Output of 'npm pack'
 *.tgz
 
+#build
+
+Frontend/app/build
 # Yarn Integrity file
 .yarn-integrity
 

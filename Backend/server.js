@@ -22,11 +22,7 @@ const cors=require("cors");
 const app= express();
 app.use(require('cookie-parser')());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(
-  cors({
-    origin: ["http://localhost:5000", "https://ecomprojecthk.onrender.com"],
-  })
-);
+
 app.use(express.json());
 
 
