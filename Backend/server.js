@@ -24,7 +24,7 @@ app.use(require('cookie-parser')());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://ecomprojecthk.onrender.com"],
+    origin: ["http://localhost:5000", "https://ecomprojecthk.onrender.com"],
   })
 );
 app.use(express.json());
@@ -532,6 +532,8 @@ app.post("/delete-account",function(req,res){
             }
             else{
               console.log("an account was deleted");
+              loginstatus=0;
+              logout=0;
             }
             
           });
