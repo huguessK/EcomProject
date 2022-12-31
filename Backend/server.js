@@ -11,13 +11,43 @@ const bcrypt=require("bcrypt"); //salting and hashing passwords
 const { fchownSync } = require("fs");
 const saltRounds=10; //this value is enough
 
-//creation of new espress object
+//for Cookies and Sessions
+const session= require('express-session');
+const passport= require("passport");
+const passportLocalMongoose=require("passport-local-mongoose");
+const { response } = require("express");
+const cors=require("cors");
+
+//creation of new express object
 const app= express();
-//for post request
+app.use(require('cookie-parser')());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://ecomprojecthk.onrender.com"],
+  })
+);
 app.use(express.json());
 
 
+//for mongoose
+mongoose.set('strictQuery', false);
+
+
+/*
+//maxAge=1h
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60,
+  }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+*/
 
 
 /**api cart */

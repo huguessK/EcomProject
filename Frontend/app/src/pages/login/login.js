@@ -10,7 +10,7 @@ const LoginForm = () => {
 
   const [email, setEmail] = useState("");
   const [psw, setPsw] = useState("");
-  const [remember, setRemember] = useState("false");
+  const [remember, setRemember] = useState(1);
   const [failedmessage, setFailedMessage] = useState("");
   
   let handleSubmit = (event) => {
@@ -74,8 +74,8 @@ const LoginForm = () => {
         <button type="submit">Login</button>
         
         <label>
-          <input type="checkbox"  name="remember" value={remember}
-            onChange={() => setRemember("true")}/> Remember me
+          <input type="checkbox"  name="remember" value={remember} checked
+            onChange={() => setRemember(0)}/> Remember me
         </label>
       </div>
 

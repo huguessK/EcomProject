@@ -79,6 +79,10 @@ Backend/.env
 .env
 Frontend/app/.env
 Frontend/.env
+Frontend/app/.env.production
+Frontend/.env.production
+Frontend/app/.env.development
+Frontend/.env.development
 .env.development.local
 .env.test.local
 .env.production.local
