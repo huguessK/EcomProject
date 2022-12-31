@@ -18,8 +18,6 @@ The technologies I will use for this project:
 - frontend: React.js, React hook, React components, React props, jsx, css, html, bootstrap
 - vs code as editor
 
-See project : https://ecomprojecthk.onrender.com
-This site is designed for screens wider than 1115 px -- Suitable for PCs, Laptops, Surface Hub
 
         My progress on the project
 
@@ -40,6 +38,6 @@ completed tasks:
 - added faq, about and contact pages
 - this site is designed for screens wider than 1115 px -- Suitable for PCs, Laptops, Surface Hub
 
-See project : https://ecomprojecthk.onrender.com
+
 
 
