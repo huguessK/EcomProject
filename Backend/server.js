@@ -6,16 +6,16 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 //const request = require ("request");//not used in the end
 const https= require("https");
-const { isDataView } = require("util/types");
+//const { isDataView } = require("util/types");
 const bcrypt=require("bcrypt"); //salting and hashing passwords
-const { fchownSync } = require("fs");
+//const { fchownSync } = require("fs");
 const saltRounds=10; //this value is enough
 
 //for Cookies and Sessions
 const session= require('express-session');
 const passport= require("passport");
 const passportLocalMongoose=require("passport-local-mongoose");
-const { response } = require("express");
+//const { response } = require("express");
 const cors=require("cors");
 
 //creation of new express object
