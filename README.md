@@ -40,12 +40,6 @@ completed tasks:
 - possibility to subscribe to the newsletter and get a discount
 - create a payment gateway using paypal SDK
 - added faq, about and contact pages
-- the site is fully functional for screens wider than 1108px
+- this site is designed for screens wider than 1115 px -- Suitable for PCs, Laptops, Surface Hub
 
-tasks to be performed:
-
-- site to be responsive (for screen width < 1108px)
-
-
-        I will add session cookies once the site is fully responsive.
 
