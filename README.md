@@ -39,5 +39,8 @@ completed tasks:
 - this site is designed for screens wider than 1115 px -- Suitable for PCs, Laptops, Surface Hub
 
 
+See project : https://leafy-kulfi-75cef4.netlify.app
 
+Notes : I observed some latencies in the fetch methods, I will work to improve this in the continuation of the project.
+I don't store the data (products in cart...) of each session except for the account data, so it could happen that at the loading of the site you already have products in your cart. This is normal because my server (backend) is a shared server.
 
