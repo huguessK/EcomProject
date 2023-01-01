@@ -82,15 +82,9 @@ function ProductComponentV1(props){
     //const [updateproduct, setUpdateproduct]=useState({"currentquantity":0});
   
       
-  fetch("/api/cart-item-quantity/updateproduct/fashion-men/"+(props.id), {
-    mode: "no-cors",
-    method: "GET",
-    headers: {
-      "Accept": "application/json",
-    }
-  }).then(
-    response=> response.json()
-    ).then(
+  fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity/updateproduct/fashion-men/"+(props.id))
+  .then(response=> response.json())
+  .then(
     data => {
       //setUpdateproduct(data);
       setQuantity(data.currentquantity);
@@ -105,7 +99,7 @@ function ProductComponentV1(props){
   function sendItemQuantity(quantity)
   {  
         
-    fetch("/api/cart-item-quantity", {
+    fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity", {
             method: "POST",
             headers :{
               'Content-Type':'application/json',
@@ -145,7 +139,7 @@ function ProductComponentV1(props){
     let index=props.colorofproducts.findIndex(searchindex);
     productindexx+=1;
     //send data to back
-    fetch("/api/product-index-fashion-men", {
+    fetch("https://ecomzuzuserver.onrender.com/api/product-index-fashion-men", {
       method: "POST",
       headers :{
         'Content-Type':'application/json',
@@ -153,11 +147,8 @@ function ProductComponentV1(props){
       body: JSON.stringify({
         index: index,
         id : props.id,
-      })}).then(function(response) {
-        
-        return response.json();
-
-    });
+      })})
+      .then(function(response) { return response.json();});
 
   }
 
@@ -212,15 +203,9 @@ function CreateProduct(Prod){
   const [productindex, setProductindex]=useState({"index":0, "id":1});
   useEffect(() => {
       
-      fetch("/api/product-index-fashion-men", {
-        mode: "no-cors",
-        method: "GET",
-        headers: {
-          "Accept": "application/json"
-        }
-      }).then(
-        response=> response.json()
-        ).then(
+      fetch("https://ecomzuzuserver.onrender.com/api/product-index-fashion-men")
+      .then(response=> response.json())
+      .then(
         data => {
           if(data.id===Prod.id){
           setProductindex(data);
@@ -235,15 +220,9 @@ function CreateProduct(Prod){
 const [currentquantity, setCurrentquantity]=useState({"currentquantity":0});
 useEffect(() => {
       
-  fetch("/api/cart-item-quantity/fashion-men/"+(Prod.id), {
-    mode: "no-cors",
-    method: "GET",
-    headers: {
-      "Accept": "application/json"
-    }
-  }).then(
-    response=> response.json()
-    ).then(
+  fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity/fashion-men/"+(Prod.id))
+  .then(response=> response.json())
+  .then(
     data => {
       setCurrentquantity(data);
       }
@@ -293,16 +272,9 @@ function FashionMen(){
 
     const interval = setInterval(() => {
       
-      fetch("/api/cart-item-quantity", {
-        mode: "no-cors",
-        method: "GET",
-        headers: {
-          "Accept": "application/json"
-        }
-      }).then(
-        response=> response.json()
-        )
-        .then(
+      fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+      .then(response=> response.json())
+      .then(
         data => {
           setBackendData(data);
           console.log(data);

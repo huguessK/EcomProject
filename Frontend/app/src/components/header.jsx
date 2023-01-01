@@ -12,16 +12,9 @@ const [logincolor, setColor] = useState("white");
 
 useEffect(() => {
   const interval = setInterval(() => {
-fetch("/api/logout", {
-  mode: "no-cors",
-  method: "GET",
-  headers: {
-    "Accept": "application/json",
-  }
-}).then(
-  response=> response.json()
-  ).then(
-  data => {
+fetch("https://ecomzuzuserver.onrender.com/api/logout")
+.then(response=> response.json())
+  .then(data => {
     console.log(data);
     setLogoutstatus(data["logout"]);
     if(data["logout"]===1){

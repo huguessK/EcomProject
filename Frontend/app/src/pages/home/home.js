@@ -197,9 +197,9 @@ const Home = () => {
 
     const interval = setInterval(() => {
       
-      fetch("/api/cart-item-quantity").then(
-        response=> response.json()
-        ).then(
+      fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+      .then(response=> response.json())
+      .then(
         data => {
           setBackendData(data)
           }

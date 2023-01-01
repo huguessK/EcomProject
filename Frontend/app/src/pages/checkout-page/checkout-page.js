@@ -65,12 +65,9 @@ const [allproducts, setAllproducts]=useState([]);
 
 //get all products add to cart
 
-fetch("/api/all-products").then(
-response=> response.json()
-).then(
-data => {
-  setAllproducts(data.products);
-  }
+fetch("https://ecomzuzuserver.onrender.com/api/all-products")
+.then(response=> response.json())
+.then(data => {setAllproducts(data.products);}
 )
 
 return(
@@ -85,27 +82,22 @@ const Checkout=()=>{
 
     const [backendData, setBackendData]=useState({});
     
-    fetch("/api/cart-item-quantity").then(
-        response=> response.json()
-        ).then(
-        data => {
-          setBackendData(data)
-          }
-        )
+    fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+    .then(response=> response.json())
+    .then(data => {setBackendData(data)})
 
     //automatic discount of 10% if the user subscribed to the newsletter
   
     const [reductionPercentage, setReduction]=useState(1);
-    fetch("/api/discount-code").then(
-      response=> response.json()
-      ).then(
+    fetch("https://ecomzuzuserver.onrender.com/api/discount-code")
+    .then(response=> response.json())
+    .then(
       data => {
         if(data.code.length!=0){
           setReduction(10); 
-          
-        }
+          }
 
-        fetch("/api/price", {
+        fetch("https://ecomzuzuserver.onrender.com/api/price", {
           method: "POST",
           headers :{
             'Content-Type':'application/json',

@@ -40,7 +40,7 @@ const ButtonWrapper = ({ currency, showSpinner}) => {
 
         async function getUsers() {
             try {
-              const response = await fetch('/api/price', {
+              const response = await fetch('https://ecomzuzuserver.onrender.com/api/price', {
                 method: 'GET',
                 headers: {
                   Accept: 'application/json',

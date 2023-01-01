@@ -15,7 +15,7 @@ const LoginForm = () => {
   
   let handleSubmit = (event) => {
     
-      fetch("/login-data", {
+      fetch("https://ecomzuzuserver.onrender.com/login-data", {
         method: "POST",
         headers :{
           'Content-Type':'application/json',
@@ -36,9 +36,9 @@ const LoginForm = () => {
 
     const [loginstatus, setLoginstatus] = useState(2);
 
-    fetch("/login-data").then(
-      response=> response.json()
-      ).then(
+    fetch("https://ecomzuzuserver.onrender.com/login-data")
+    .then(response=> response.json())
+    .then(
       data => {
         setLoginstatus(data["login"]);
         if(data["login"]===1){setFailedMessage("");}
@@ -100,9 +100,9 @@ const Login = () => {
 
     const interval = setInterval(() => {
       
-      fetch("/api/cart-item-quantity").then(
-        response=> response.json()
-        ).then(
+      fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+      .then(response=> response.json())
+      .then(
         data => {
           setBackendData(data)
           }

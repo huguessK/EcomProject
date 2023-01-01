@@ -34,9 +34,9 @@ const About = () => {
   const [backendData, setBackendData]=useState({});
 
   useEffect(() => {  
-      fetch("/api/cart-item-quantity").then(
-        response=> response.json()
-        ).then(
+      fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+      .then(response=> response.json())
+      .then(
         data => {
           setBackendData(data);
           }

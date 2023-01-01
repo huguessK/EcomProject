@@ -91,6 +91,11 @@ Frontend/.env.development
 .env.production.local
 .env.local
 
+#build folder
+Frontend/app/build
+
+
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache

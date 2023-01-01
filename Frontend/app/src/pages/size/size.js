@@ -8,9 +8,9 @@ function SizeMen(){
 
     const [backendData, setBackendData]=useState({});
     
-    fetch("/api/cart-item-quantity").then(
-        response=> response.json()
-        ).then(
+    fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+    .then(response=> response.json())
+    .then(
         data => {
           setBackendData(data)
           }
@@ -32,9 +32,9 @@ function SizeWomen(){
 
     const [backendData, setBackendData]=useState({});
     
-    fetch("/api/cart-item-quantity").then(
-        response=> response.json()
-        ).then(
+    fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+    .then(response=> response.json())
+    .then(
         data => {
           setBackendData(data)
           }

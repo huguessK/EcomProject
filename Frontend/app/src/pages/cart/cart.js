@@ -34,7 +34,7 @@ function ProductInCart(props){
   function sendItemQuantity(quantity)
   {  
         
-    fetch("/api/cart-item-quantity", {
+    fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity", {
             method: "POST",
             headers :{
               'Content-Type':'application/json',
@@ -159,9 +159,9 @@ function Cart(){
   const [backendData, setBackendData]=useState({});
   const [login, setLogin]=useState(0);
   
-  fetch("/api/cart-item-quantity").then(
-  response=> response.json()
-  ).then(
+  fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+  .then(response=> response.json())
+  .then(
   data => {
     setBackendData(data)
     setLogin(data.login);
@@ -176,9 +176,9 @@ function Cart(){
   
     //get all products add to cart
    
-  fetch("/api/all-products").then(
-    response=> response.json()
-    ).then(
+  fetch("https://ecomzuzuserver.onrender.com/api/all-products")
+  .then(response=> response.json())
+  .then(
     data => {
       setAllproducts(data.products);
       }

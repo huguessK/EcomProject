@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/*"
+  to = "https://ecomzuzuserver.onrender.com"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}

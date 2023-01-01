@@ -17,7 +17,7 @@ const CreateForm = () => {
   let handleSubmit = (event) => {
     
     
-      fetch("/create-account-data", {
+      fetch("https://ecomzuzuserver.onrender.com/create-account-data", {
         method: "POST",
         headers :{
           'Content-Type':'application/json',
@@ -40,9 +40,9 @@ const CreateForm = () => {
       //check if the email used to create the account already exists in the database
 
       setTimeout(function() {
-      fetch("/create-account-data").then(
-        response=> response.json()
-        ).then(
+      fetch("https://ecomzuzuserver.onrender.com/create-account-data")
+      .then(response=> response.json())
+      .then(
         data => {
               if(data.alreadyused===0){
                 //account have been created -> redirect user to login page
@@ -125,9 +125,9 @@ const CreateAccounte = () => {
   
       const interval = setInterval(() => {
         
-        fetch("/api/cart-item-quantity").then(
-          response=> response.json()
-          ).then(
+        fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+        .then(response=> response.json())
+        .then(
           data => {
             setBackendData(data)
             }

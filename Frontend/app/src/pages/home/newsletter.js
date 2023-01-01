@@ -13,7 +13,7 @@ function NewsLetter(){
 
     //post email and discount code r to the server for processing
     if(email!=""){
-      fetch("/api/newsletter", {
+      fetch("https://ecomzuzuserver.onrender.com/api/newsletter", {
         method: "POST",
         headers :{
           'Content-Type':'application/json',

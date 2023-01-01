@@ -18,9 +18,9 @@ let currentAddr;
 let currentPhone;
 
 useEffect(() => {
-fetch("/account-datas").then(
-  response=> response.json()
-  ).then(
+fetch("https://ecomzuzuserver.onrender.com/account-datas")
+.then(response=> response.json())
+.then(
   data => {
     setAccountdatas(data);
     setAddr(data.address);
@@ -44,7 +44,7 @@ function Update(){
   }
 
 
-  fetch("/update", {
+  fetch("https://ecomzuzuserver.onrender.com/update", {
     method: "POST",
     headers :{
       'Content-Type':'application/json',
@@ -158,9 +158,9 @@ function Orders(){
   
   //get all products add to cart
  
-fetch("/api/all-products").then(
-  response=> response.json()
-  ).then(
+fetch("https://ecomzuzuserver.onrender.com/api/all-products")
+.then(response=> response.json())
+.then(
   data => {
     setAllproducts(data.products);
     }
@@ -186,9 +186,9 @@ const InfosToDisplay=()=>{
 
     const interval = setInterval(() => {
       
-      fetch("/api/cart-item-quantity").then(
-        response=> response.json()
-        ).then(
+      fetch("https://ecomzuzuserver.onrender.com/api/cart-item-quantity")
+      .then(response=> response.json())
+      .then(
         data => {
           setBackendData(data)
           }
@@ -203,7 +203,7 @@ const InfosToDisplay=()=>{
 
 function handleDelete(){
 
- fetch("/delete-account", {
+ fetch("https://ecomzuzuserver.onrender.com/delete-account", {
    method: "POST",
      headers :{
         'Content-Type':'application/json',
@@ -220,7 +220,7 @@ function handleDelete(){
 
   function handleClick(){
      
-    fetch("/login-data", {
+    fetch("https://ecomzuzuserver.onrender.com/login-data", {
       method: "POST",
       headers :{
         'Content-Type':'application/json',
