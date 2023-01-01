@@ -3,6 +3,7 @@ import React,{ useState, useEffect}   from 'react'; //remove useState if not use
 import "./footer-header.css";
 
 
+
 function Header(valItem){
 
 //check if login or not
@@ -11,10 +12,17 @@ const [logincolor, setColor] = useState("white");
 
 useEffect(() => {
   const interval = setInterval(() => {
-fetch("/api/logout").then(
+fetch("/api/logout", {
+  mode: "no-cors",
+  method: "GET",
+  headers: {
+    "Accept": "application/json",
+  }
+}).then(
   response=> response.json()
   ).then(
   data => {
+    console.log(data);
     setLogoutstatus(data["logout"]);
     if(data["logout"]===1){
       setColor("#C291A4");

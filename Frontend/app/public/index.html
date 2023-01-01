@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
     <meta charset="utf-8" />
     <meta name="description" content="an e-commerce website" />
     <meta name="keywords" content="multi products, e-commerce" />
     <meta name="author" content="Hugues Kouakou" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ecommerce Webshop</title>
-    <link rel="icon" href="./ecom.ico" />
+    <link rel="icon" href="ecom.ico" />
     <!--icon to be added when the project is done-->
     <link rel="stylesheet" href="index.css" />
 
     <!-- Google fonts, replace this link with the appropriate one if other fonts are needed-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-    <link
+    <!--<link
       href="https://fonts.googleapis.com/css2?family=Merriweather&amp;family=Ubuntu&amp;display=swap"
       rel="stylesheet"
-    />
+    />-->
     <link
       href="https://fonts.googleapis.com/css?family=Arvo"
       rel="stylesheet"
@@ -48,11 +49,18 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="./src/index.js" type="text/jsx"></script>
-    <script src="./src/components/pages/cart/cart.js" type="text/jsx"></script>
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
     <script
-      src="./src/components/pages/contact/contact.js"
-      type="text/jsx"
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin=""
     ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin=""
+    ></script>
+
+    <!-- Load our React component. -->
+    <script src="./src/index.js" type="text/jsx"></script>
   </body>
 </html>

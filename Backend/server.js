@@ -11,20 +11,25 @@ const bcrypt=require("bcrypt"); //salting and hashing passwords
 //const { fchownSync } = require("fs");
 const saltRounds=10; //this value is enough
 
-//for Cookies and Sessions
+/*for Cookies and Sessions
 const session= require('express-session');
 const passport= require("passport");
-const passportLocalMongoose=require("passport-local-mongoose");
+const passportLocalMongoose=require("passport-local-mongoose");*/
 //const { response } = require("express");
 const cors=require("cors");
 
 //creation of new express object
 const app= express();
-app.use(require('cookie-parser')());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.use(express.json());
 
+//allow get, post methods from any site~yeah that's not secure, I'm just working on a demo project
+app.use(cors({
+    origin: "*",
+    methods: ['GET','POST'] 
+}));
 
 //for mongoose
 mongoose.set('strictQuery', false);
@@ -540,7 +545,7 @@ res.end();
 
 var port = process.env.PORT;
 if(port==null || port==""){
-  port=3000;
+  port=5000;
 }
 
 app.listen(port, ()=> {

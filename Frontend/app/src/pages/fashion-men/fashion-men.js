@@ -82,7 +82,13 @@ function ProductComponentV1(props){
     //const [updateproduct, setUpdateproduct]=useState({"currentquantity":0});
   
       
-  fetch("/api/cart-item-quantity/updateproduct/fashion-men/"+(props.id)).then(
+  fetch("/api/cart-item-quantity/updateproduct/fashion-men/"+(props.id), {
+    mode: "no-cors",
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+    }
+  }).then(
     response=> response.json()
     ).then(
     data => {
@@ -206,7 +212,13 @@ function CreateProduct(Prod){
   const [productindex, setProductindex]=useState({"index":0, "id":1});
   useEffect(() => {
       
-      fetch("/api/product-index-fashion-men").then(
+      fetch("/api/product-index-fashion-men", {
+        mode: "no-cors",
+        method: "GET",
+        headers: {
+          "Accept": "application/json"
+        }
+      }).then(
         response=> response.json()
         ).then(
         data => {
@@ -223,7 +235,13 @@ function CreateProduct(Prod){
 const [currentquantity, setCurrentquantity]=useState({"currentquantity":0});
 useEffect(() => {
       
-  fetch("/api/cart-item-quantity/fashion-men/"+(Prod.id)).then(
+  fetch("/api/cart-item-quantity/fashion-men/"+(Prod.id), {
+    mode: "no-cors",
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    }
+  }).then(
     response=> response.json()
     ).then(
     data => {
@@ -275,12 +293,20 @@ function FashionMen(){
 
     const interval = setInterval(() => {
       
-      fetch("/api/cart-item-quantity").then(
+      fetch("/api/cart-item-quantity", {
+        mode: "no-cors",
+        method: "GET",
+        headers: {
+          "Accept": "application/json"
+        }
+      }).then(
         response=> response.json()
-        ).then(
+        )
+        .then(
         data => {
           setBackendData(data);
-          setLogin(data.login);
+          console.log(data);
+          setLogin(data["login"]);
           }
         )
 
