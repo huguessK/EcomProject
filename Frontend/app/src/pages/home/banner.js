@@ -6,7 +6,7 @@ const Banner=[
         id:1,
         time: 500,
         name: "Fashion-men",
-        img: "Images/Banner/FashionMenThanksPexels.jpg"
+        img: "Images/Banner/FashionMenThanksPexels.webp"
     }
 
     /*,{

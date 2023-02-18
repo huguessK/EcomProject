@@ -32,7 +32,7 @@ const Contact = () => {
       
       <div className="row">
         <div className="column">
-          <img src="Images/Banner/FashionWomenThanksPexels.jpg" alt="contact-image" />
+          <img src="Images/Banner/FashionWomenThanksPexels.webp" alt="contact-image" />
         </div>
         <div className="column">
           <form>
